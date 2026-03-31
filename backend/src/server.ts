@@ -20,7 +20,10 @@ if (process.env.NODE_ENV !== 'test') {
 
 // Routes
 import taskRoutes from './routes/taskRoutes';
+import userRoutes from './routes/userRoutes';
+
 app.use('/api/tasks', taskRoutes);
+app.use('/api/users', userRoutes);
 
 /**
  * Endpoint for health checks to ensure the API is reachable.

@@ -1,18 +1,35 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 /**
  * Header Component
- * Displays the application logo and the current logged-in user profile snippet.
+ * Displays the application logo, navigation links, and the current logged-in user profile snippet.
  * This component is stateless and purely presentational.
  */
 export const Header: React.FC = () => {
   return (
-    <header>
-      <div className="logo">
+    <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 2rem', background: '#fff', borderBottom: '1px solid #e2e8f0', position: 'sticky', top: 0, zIndex: 100 }}>
+      <div className="logo" style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
         <div className="logo-icon">FH</div>
-        <span>Familien Hero</span>
+        <span style={{ fontWeight: 800, fontSize: '1.25rem', color: 'var(--primary)' }}>Familien Hero</span>
       </div>
-      <div className="user-profile">
+
+      <nav style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
+        <NavLink 
+          to="/" 
+          style={({ isActive }) => ({ textDecoration: 'none', fontWeight: 600, color: isActive ? 'var(--accent)' : 'var(--primary)', borderBottom: isActive ? '2px solid var(--accent)' : 'none', padding: '0.5rem 0' })}
+        >
+          Dashboard
+        </NavLink>
+        <NavLink 
+          to="/create" 
+          style={({ isActive }) => ({ textDecoration: 'none', fontWeight: 600, color: isActive ? 'var(--accent)' : 'var(--primary)', borderBottom: isActive ? '2px solid var(--accent)' : 'none', padding: '0.5rem 0' })}
+        >
+          Neue Aufgabe
+        </NavLink>
+      </nav>
+
+      <div className="user-profile" style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
         <span>Hallo, <strong>Stefan</strong> 👋</span>
       </div>
     </header>
