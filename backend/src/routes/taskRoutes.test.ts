@@ -6,16 +6,16 @@ import app from '../server';
 import Task from '../models/Task';
 import User from '../models/User';
 
-// Set generic environment to testing
+// Setze die Umgebung auf 'test'
 process.env.NODE_ENV = 'test';
 
-describe('Familien Hero Backend Integration Tests', () => {
+describe('Familien Hero Backend Integration-Tests', () => {
   let testUserId: string;
   let testTaskId: string;
   let mongoServer: MongoMemoryServer;
 
   beforeAll(async () => {
-    // Start in-memory MongoDB server
+    // Starte den In-Memory MongoDB Server
     mongoServer = await MongoMemoryServer.create();
     const mongoUri = mongoServer.getUri();
 
@@ -23,11 +23,11 @@ describe('Familien Hero Backend Integration Tests', () => {
       await mongoose.connect(mongoUri);
     }
 
-    // Clean DB before starting tests
+    // Datenbank vor den Tests bereinigen
     await User.deleteMany({});
     await Task.deleteMany({});
 
-    // Seed test data
+    // Testdaten erstellen (Seeding)
     const user = new User({ name: 'TestUser', role: 'parent', points: 0 });
     const savedUser = await user.save();
     testUserId = savedUser._id.toString();
@@ -43,7 +43,7 @@ describe('Familien Hero Backend Integration Tests', () => {
   }, 60000);
 
   afterAll(async () => {
-    // Cleanup and disconnect
+    // Bereinigung und Verbindung trennen
     await User.deleteMany({});
     await Task.deleteMany({});
     await mongoose.connection.close();
@@ -53,7 +53,7 @@ describe('Familien Hero Backend Integration Tests', () => {
   });
 
   describe('GET /api/health', () => {
-    it('should return health status', async () => {
+    it('sollte den Health-Status zurueckgeben', async () => {
       const res = await request(app).get('/api/health');
       expect(res.status).toBe(200);
       expect(res.body.status).toBe('ok');
@@ -61,31 +61,31 @@ describe('Familien Hero Backend Integration Tests', () => {
   });
 
   describe('GET /api/tasks', () => {
-    it('should return all structured tasks', async () => {
+    it('sollte alle strukturierten Aufgaben zurueckgeben', async () => {
       const res = await request(app).get('/api/tasks');
       expect(res.status).toBe(200);
       expect(Array.isArray(res.body)).toBeTruthy();
       expect(res.body.length).toBe(1);
       expect(res.body[0].title).toBe('Tisch decken');
-      // Should populate assignedTo
+      // Pruefen, ob assignedTo korrekt gefuellt (populated) wurde
       expect(res.body[0].assignedTo.name).toBe('TestUser');
     });
   });
 
   describe('PUT /api/tasks/:id/done', () => {
-    it('should mark task as completed and reward points', async () => {
+    it('sollte Aufgabe als erledigt markieren und Punkte gutschreiben', async () => {
       const res = await request(app).put(`/api/tasks/${testTaskId}/done`);
       expect(res.status).toBe(200);
       expect(res.body.message).toMatch(/completed/i);
       expect(res.body.task.status).toBe('done');
       
-      // Points should be rewarded
+      // Punkte sollten dem Benutzer gutgeschrieben worden sein
       const userPointsRes = await request(app).get(`/api/tasks/user/${testUserId}/points`);
       expect(userPointsRes.status).toBe(200);
       expect(userPointsRes.body.points).toBe(10);
     });
 
-    it('should return an error if task is already completed', async () => {
+    it('sollte einen Fehler zurueckgeben, wenn die Aufgabe bereits erledigt ist', async () => {
       const res = await request(app).put(`/api/tasks/${testTaskId}/done`);
       expect(res.status).toBe(400);
       expect(res.body.message).toMatch(/already completed/i);

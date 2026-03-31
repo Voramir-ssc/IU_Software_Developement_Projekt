@@ -2,9 +2,9 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 /**
- * Header Component
- * Displays the application logo, navigation links, and the current logged-in user profile snippet.
- * This component is stateless and purely presentational.
+ * Header-Komponente
+ * Zeigt das Anwendungslogo, Navigationslinks und eine kurze Profilinfo des angemeldeten Benutzers.
+ * Diese Komponente ist zustandslos und dient ausschliesslich der Darstellung (Presentational Component).
  */
 export const Header: React.FC = () => {
   return (

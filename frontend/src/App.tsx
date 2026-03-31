@@ -4,9 +4,9 @@ import Dashboard from './pages/Dashboard';
 import TaskCreate from './pages/TaskCreate';
 
 /**
- * App Main Component
- * Sets up the routing structure for the Single Page Application (SPA).
- * Provides navigation between the Dashboard and the Task Creation form.
+ * Hauptkomponente der Anwendung
+ * Konfiguriert die Routing-Struktur fuer die Single Page Application (SPA).
+ * Ermoeglicht die Navigation zwischen dem Dashboard und dem Formular zur Aufgabenerstellung.
  */
 function App() {
   return (

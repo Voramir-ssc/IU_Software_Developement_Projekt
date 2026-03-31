@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import type { User } from '../types';
 
 /**
- * TaskCreate Page
- * Provides a form interface for creating new tasks.
- * Demonstrates 'Data Entry and Processing' as required by the assignment.
+ * Seite zur Aufgabenerstellung
+ * Bietet ein Formular zum Anlegen neuer Aufgaben.
+ * Demonstriert die "Eingabe von Daten und deren Verarbeitung", wie in der Aufgabenstellung gefordert.
  */
 const TaskCreate: React.FC = () => {
   const navigate = useNavigate();
@@ -19,11 +19,11 @@ const TaskCreate: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    // Fetch users for the assignment dropdown
+    // Benutzer fuer das Zuweisungs-Dropdown abrufen
     fetch('http://localhost:5000/api/users')
       .then(res => res.json())
       .then(data => setUsers(data))
-      .catch(err => console.error('Error fetching users:', err));
+      .catch(err => console.error('Fehler beim Abrufen der Benutzer:', err));
   }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -50,13 +50,13 @@ const TaskCreate: React.FC = () => {
       });
 
       if (res.ok) {
-        // Navigate back to dashboard on success
+        // Bei Erfolg zurueck zum Dashboard navigieren
         navigate('/');
       } else {
         alert('Fehler beim Erstellen der Aufgabe.');
       }
     } catch (err) {
-      console.error('Submit Error:', err);
+      console.error('Fehler beim Senden:', err);
       alert('Backend-Verbindung fehlgeschlagen.');
     } finally {
       setIsSubmitting(false);

@@ -3,8 +3,8 @@ import { describe, it, expect } from 'vitest';
 import { StatsGrid } from './StatsGrid';
 import type { Task } from '../types';
 
-describe('StatsGrid Component', () => {
-  it('renders correct open tasks count', () => {
+describe('StatsGrid Komponente', () => {
+  it('rendert die korrekte Anzahl offener Aufgaben', () => {
     const mockTasks: Task[] = [
       { _id: '1', title: 'Task 1', status: 'open', assignedTo: { _id: 'a', name: 'S' }, pointsReward: 10 },
       { _id: '2', title: 'Task 2', status: 'done', assignedTo: { _id: 'a', name: 'S' }, pointsReward: 10 }
@@ -12,11 +12,11 @@ describe('StatsGrid Component', () => {
 
     render(<StatsGrid tasks={mockTasks} marlenePoints={100} apiStatus="OK" />);
     
-    // There should be 1 open task
+    // Es sollte genau eine offene Aufgabe gefunden werden
     expect(screen.getByText('1')).toBeInTheDocument();
   });
 
-  it('renders correct points logic for child', () => {
+  it('rendert die korrekte Logik fuer den Punktestand (Kind)', () => {
     render(<StatsGrid tasks={[]} marlenePoints={500} apiStatus="OK" />);
     
     expect(screen.getByText('500 ★')).toBeInTheDocument();

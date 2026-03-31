@@ -7,12 +7,12 @@ interface TaskItemProps {
 }
 
 /**
- * TaskItem Component
- * Renders a single task with its details and dynamic status actions.
- * Contains a button to mark an 'open' task as 'done'.
+ * TaskItem-Komponente
+ * Rendert eine einzelne Aufgabe mit ihren Details und dynamischen Status-Aktionen.
+ * Enthaelt eine Schaltflaeche, um eine offene Aufgabe als erledigt zu markieren.
  * 
- * @param props.task - The task object containing title, status, etc.
- * @param props.onComplete - Callback executed when the task is marked as done
+ * @param props.task - Das Aufgaben-Objekt inkl. Titel, Status, etc.
+ * @param props.onComplete - Callback, der beim Abschluss einer Aufgabe ausgefuehrt wird
  */
 export const TaskItem: React.FC<TaskItemProps> = ({ task, onComplete }) => {
   return (

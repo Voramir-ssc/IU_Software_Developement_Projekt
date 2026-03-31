@@ -8,15 +8,15 @@ interface StatsGridProps {
 }
 
 /**
- * StatsGrid Component
- * Displays the high-level metrics of the application:
- * - Number of open tasks
- * - The points accumulated by the child (gamification element)
- * - The current API health status
+ * StatsGrid-Komponente
+ * Zeigt die uebergeordneten Kennzahlen der Anwendung an:
+ * - Anzahl der offenen Aufgaben
+ * - Derzeitige Punkte des Kindes (Gamification-Element)
+ * - Aktueller API-Status
  * 
- * @param props.tasks - Array of all tasks
- * @param props.marlenePoints - The current score of the child
- * @param props.apiStatus - Connection status to the backend
+ * @param props.tasks - Array aller Aufgaben
+ * @param props.marlenePoints - Aktueller Punktestand des Kindes
+ * @param props.apiStatus - Verbindungsstatus zum Backend
  */
 export const StatsGrid: React.FC<StatsGridProps> = ({ tasks, marlenePoints, apiStatus }) => {
   const openTasksCount = tasks.filter(t => t.status === 'open').length;

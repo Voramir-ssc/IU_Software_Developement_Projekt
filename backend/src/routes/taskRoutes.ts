@@ -6,12 +6,12 @@ const router = express.Router();
 
 /**
  * GET /api/tasks
- * Retrieves a list of all tasks from the database.
- * Populates the 'assignedTo' field with the user's name and role to provide context.
+ * Ruft eine Liste aller Aufgaben aus der Datenbank ab.
+ * Fuellt das Feld 'assignedTo' mit dem Namen und der Rolle des Benutzers, um Kontext zu bieten.
  * 
  * @route GET /api/tasks
- * @returns {Task[]} 200 - Array of task objects with populated user details
- * @returns {Error} 500 - Internal server error if database query fails
+ * @returns {Task[]} 200 - Array von Aufgaben-Objekten mit Details zum zugewiesenen Benutzer
+ * @returns {Error} 500 - Interner Serverfehler, wenn die Datenbankabfrage fehlschlaegt
  */
 router.get('/', async (req: Request, res: Response) => {
   try {
@@ -24,15 +24,15 @@ router.get('/', async (req: Request, res: Response) => {
 
 /**
  * POST /api/tasks
- * Creates a new task in the database and assigns it to a user.
+ * Erstellt eine neue Aufgabe in der Datenbank und weist sie einem Benutzer zu.
  * 
  * @route POST /api/tasks
- * @param {string} title.body.required - Title of the task
- * @param {string} description.body - Description of the task
- * @param {string} assignedTo.body.required - User ID to assign the task to
- * @param {number} pointsReward.body.required - Points rewarded upon completion
- * @returns {Task} 201 - The newly created task object
- * @returns {Error} 400 - Validation error or bad request
+ * @param {string} title.body.required - Titel der Aufgabe
+ * @param {string} description.body - Beschreibung der Aufgabe
+ * @param {string} assignedTo.body.required - Benutzer-ID, der die Aufgabe zugewiesen wird
+ * @param {number} pointsReward.body.required - Punktebelohnung bei Abschluss
+ * @returns {Task} 201 - Das neu erstellte Aufgaben-Objekt
+ * @returns {Error} 400 - Validierungsfehler oder ungueltige Anfrage
  */
 router.post('/', async (req: Request, res: Response) => {
   const { title, description, assignedTo, pointsReward } = req.body;
@@ -47,14 +47,14 @@ router.post('/', async (req: Request, res: Response) => {
 
 /**
  * PUT /api/tasks/:id/done
- * Marks a specific task as 'done' and credits the associated points to the assigned user.
- * Prevents rewarding points multiple times for the same task.
+ * Markiert eine spezifische Aufgabe als 'erledigt' (done) und schreibt dem Benutzer die Punkte gut.
+ * Verhindert, dass Punkte mehrfach fuer dieselbe Aufgabe vergeben werden.
  * 
  * @route PUT /api/tasks/:id/done
- * @param {string} id.path.required - The ID of the task to complete
- * @returns {object} 200 - Success message, updated task and updated user points
- * @returns {Error} 404 - Task not found
- * @returns {Error} 400 - Task already completed or update failed
+ * @param {string} id.path.required - Die ID der zu erledigenden Aufgabe
+ * @returns {object} 200 - Erfolgsmeldung, aktualisierte Aufgabe und aktueller Punktestand
+ * @returns {Error} 404 - Aufgabe nicht gefunden
+ * @returns {Error} 400 - Aufgabe bereits erledigt oder Aktualisierung fehlgeschlagen
  */
 router.put('/:id/done', async (req: Request, res: Response) => {
   try {
@@ -62,11 +62,11 @@ router.put('/:id/done', async (req: Request, res: Response) => {
     if (!task) return res.status(404).json({ message: 'Task not found' });
     if (task.status === 'done') return res.status(400).json({ message: 'Task already completed' });
 
-    // Update Task Status
+    // Status der Aufgabe aktualisieren
     task.status = 'done';
     await task.save();
 
-    // Reward Points to User
+    // Punkte dem Benutzer gutschreiben
     const user = await User.findById(task.assignedTo);
     if (user) {
       user.points += task.pointsReward;
@@ -81,12 +81,12 @@ router.put('/:id/done', async (req: Request, res: Response) => {
 
 /**
  * GET /api/tasks/user/:id/points
- * Retrieves the total accumulated points for a specific user.
+ * Ruft den aktuellen Punktestand fuer einen spezifischen Benutzer ab.
  * 
  * @route GET /api/tasks/user/:id/points
- * @param {string} id.path.required - The ID of the user
- * @returns {object} 200 - Contains the points total (e.g. { points: 150 })
- * @returns {Error} 400 - Database query failed
+ * @param {string} id.path.required - Die ID des Benutzers
+ * @returns {object} 200 - Enthaelt die Gesamtpunktzahl (z.B. { points: 150 })
+ * @returns {Error} 400 - Datenbankabfrage fehlgeschlagen
  */
 router.get('/user/:id/points', async (req: Request, res: Response) => {
   try {

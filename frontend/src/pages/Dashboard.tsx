@@ -4,8 +4,8 @@ import { TaskItem } from '../components/TaskItem';
 import type { Task } from '../types';
 
 /**
- * Dashboard Page
- * Main view showing task statistics, current points, and the list of tasks.
+ * Dashboard-Seite
+ * Hauptansicht, die Aufgabenstatistiken, den aktuellen Punktestand und die Liste der Aufgaben zeigt.
  */
 const Dashboard: React.FC = () => {
   const [apiStatus, setApiStatus] = useState<string>('Connecting...');
@@ -13,11 +13,11 @@ const Dashboard: React.FC = () => {
   const [marlenePoints, setMarlenePoints] = useState<number>(0);
 
   /**
-   * Fetches the current state from the backend.
+   * Ruft den aktuellen Status vom Backend ab (Health, Tasks, Points).
    */
   const fetchData = async () => {
     try {
-      // 1. Check API Health
+      // 1. API-Status pruefen (Health-Check)
       const healthRes = await fetch('http://localhost:5000/api/health');
       if (healthRes.ok) {
         const healthData = await healthRes.json();
@@ -26,12 +26,12 @@ const Dashboard: React.FC = () => {
         setApiStatus('Backend Fehler');
       }
 
-      // 2. Fetch Tasks
+      // 2. Aufgaben abrufen
       const tasksRes = await fetch('http://localhost:5000/api/tasks');
       const tasksData = await tasksRes.json();
       setTasks(tasksData);
 
-      // 3. Fetch Child Points specifically for the dashboard
+      // 3. Punkte des Kindes (Marlene) gezielt fuer das Dashboard abrufen
       const childTask = tasksData.find((t: any) => t.assignedTo?.role === 'child');
       if (childTask) {
         const pointsRes = await fetch(`http://localhost:5000/api/tasks/user/${childTask.assignedTo._id}/points`);
@@ -39,7 +39,7 @@ const Dashboard: React.FC = () => {
         setMarlenePoints(pointsData.points);
       }
     } catch (err) {
-      console.error('Data Fetch Error:', err);
+      console.error('Fehler beim Datenabruf:', err);
       setApiStatus('Backend Offline');
     }
   };
@@ -49,14 +49,14 @@ const Dashboard: React.FC = () => {
   }, []);
 
   /**
-   * Completes a task by its ID and refreshes the view.
-   * @param id The unique identifier of the task
+   * Markiert eine Aufgabe als erledigt und aktualisiert die Ansicht.
+   * @param id Die eindeutige ID der Aufgabe
    */
   const completeTask = async (id: string) => {
     try {
       const res = await fetch(`http://localhost:5000/api/tasks/${id}/done`, { method: 'PUT' });
       if (res.ok) {
-        fetchData(); // Refresh UI State
+        fetchData(); // UI-Status aktualisieren
       }
     } catch (err) {
       console.error('Error completing task:', err);

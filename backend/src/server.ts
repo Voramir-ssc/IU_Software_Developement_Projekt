@@ -26,8 +26,8 @@ app.use('/api/tasks', taskRoutes);
 app.use('/api/users', userRoutes);
 
 /**
- * Endpoint for health checks to ensure the API is reachable.
- * Useful for monitoring and initial connection testing from the frontend.
+ * Endpunkt fuer Health-Checks, um sicherzustellen, dass die API erreichbar ist.
+ * Nuetzlich fuer Monitoring und initiales Verbindungstests vom Frontend aus.
  * 
  * @route GET /api/health
  */
@@ -36,9 +36,9 @@ app.get('/api/health', (req: Request, res: Response) => {
 });
 
 /**
- * Initializes the server on the specified PORT.
- * Only starts listening if not currently in a test environment,
- * preventing 'address already in use' errors during integration tests.
+ * Initialisiert den Server auf dem angegebenen PORT.
+ * Der Server startet nur, wenn er sich nicht in einer Testumgebung befindet,
+ * um Konflikte ("address already in use") bei Integration-Tests zu vermeiden.
  */
 if (process.env.NODE_ENV !== 'test') {
   app.listen(PORT, () => {
@@ -46,5 +46,5 @@ if (process.env.NODE_ENV !== 'test') {
   });
 }
 
-// Export the Express app instance for use in integration tests (e.g., vitest / supertest).
+// Exportiert die Express-Instanz fuer Integration-Tests (z.B. vitest / supertest).
 export default app;

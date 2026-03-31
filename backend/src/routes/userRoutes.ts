@@ -5,12 +5,12 @@ const router = express.Router();
 
 /**
  * GET /api/users
- * Retrieves a list of all users from the database.
- * Used for populating search fields or assignment dropdowns in the frontend.
+ * Ruft eine Liste aller Benutzer aus der Datenbank ab.
+ * Wird verwendet, um Suchfelder oder Zuweisungs-Dropdowns im Frontend zu fuellen.
  * 
  * @route GET /api/users
- * @returns {User[]} 200 - Array of user objects
- * @returns {Error} 500 - Internal server error
+ * @returns {User[]} 200 - Array von Benutzer-Objekten
+ * @returns {Error} 500 - Interner Serverfehler
  */
 router.get('/', async (req: Request, res: Response) => {
   try {
