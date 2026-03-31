@@ -12,9 +12,11 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/familien-hero')
-  .then(() => console.log('Connected to MongoDB Atlas'))
-  .catch(err => console.error('MongoDB connection error:', err));
+if (process.env.NODE_ENV !== 'test') {
+  mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/familien-hero')
+    .then(() => console.log('Connected to MongoDB Atlas'))
+    .catch(err => console.error('MongoDB connection error:', err));
+}
 
 // Routes
 import taskRoutes from './routes/taskRoutes';

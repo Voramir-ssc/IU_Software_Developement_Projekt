@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import request from 'supertest';
 import mongoose from 'mongoose';
+import { MongoMemoryServer } from 'mongodb-memory-server';
 import app from '../server';
 import Task from '../models/Task';
 import User from '../models/User';
@@ -11,11 +12,15 @@ process.env.NODE_ENV = 'test';
 describe('Familien Hero Backend Integration Tests', () => {
   let testUserId: string;
   let testTaskId: string;
+  let mongoServer: MongoMemoryServer;
 
   beforeAll(async () => {
-    // Note: ensure local MongoDB is running as requested in the documentation
+    // Start in-memory MongoDB server
+    mongoServer = await MongoMemoryServer.create();
+    const mongoUri = mongoServer.getUri();
+
     if (mongoose.connection.readyState === 0) {
-      await mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/familien-hero-test');
+      await mongoose.connect(mongoUri);
     }
 
     // Clean DB before starting tests
@@ -35,13 +40,16 @@ describe('Familien Hero Backend Integration Tests', () => {
     });
     const savedTask = await task.save();
     testTaskId = savedTask._id.toString();
-  });
+  }, 60000);
 
   afterAll(async () => {
     // Cleanup and disconnect
     await User.deleteMany({});
     await Task.deleteMany({});
     await mongoose.connection.close();
+    if (mongoServer) {
+      await mongoServer.stop();
+    }
   });
 
   describe('GET /api/health', () => {
