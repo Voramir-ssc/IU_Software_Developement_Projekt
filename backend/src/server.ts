@@ -20,11 +20,26 @@ mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/familien-he
 import taskRoutes from './routes/taskRoutes';
 app.use('/api/tasks', taskRoutes);
 
-// Health Route
+/**
+ * Endpoint for health checks to ensure the API is reachable.
+ * Useful for monitoring and initial connection testing from the frontend.
+ * 
+ * @route GET /api/health
+ */
 app.get('/api/health', (req: Request, res: Response) => {
   res.json({ status: 'ok', message: 'Familien Hero API is running!' });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+/**
+ * Initializes the server on the specified PORT.
+ * Only starts listening if not currently in a test environment,
+ * preventing 'address already in use' errors during integration tests.
+ */
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+  });
+}
+
+// Export the Express app instance for use in integration tests (e.g., vitest / supertest).
+export default app;

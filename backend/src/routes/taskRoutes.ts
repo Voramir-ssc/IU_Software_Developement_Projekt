@@ -4,7 +4,15 @@ import User from '../models/User';
 
 const router = express.Router();
 
-// Get all tasks
+/**
+ * GET /api/tasks
+ * Retrieves a list of all tasks from the database.
+ * Populates the 'assignedTo' field with the user's name and role to provide context.
+ * 
+ * @route GET /api/tasks
+ * @returns {Task[]} 200 - Array of task objects with populated user details
+ * @returns {Error} 500 - Internal server error if database query fails
+ */
 router.get('/', async (req: Request, res: Response) => {
   try {
     const tasks = await Task.find().populate('assignedTo', 'name role');
@@ -14,7 +22,18 @@ router.get('/', async (req: Request, res: Response) => {
   }
 });
 
-// Create a new task
+/**
+ * POST /api/tasks
+ * Creates a new task in the database and assigns it to a user.
+ * 
+ * @route POST /api/tasks
+ * @param {string} title.body.required - Title of the task
+ * @param {string} description.body - Description of the task
+ * @param {string} assignedTo.body.required - User ID to assign the task to
+ * @param {number} pointsReward.body.required - Points rewarded upon completion
+ * @returns {Task} 201 - The newly created task object
+ * @returns {Error} 400 - Validation error or bad request
+ */
 router.post('/', async (req: Request, res: Response) => {
   const { title, description, assignedTo, pointsReward } = req.body;
   try {
@@ -26,7 +45,17 @@ router.post('/', async (req: Request, res: Response) => {
   }
 });
 
-// Mark task as done and reward points
+/**
+ * PUT /api/tasks/:id/done
+ * Marks a specific task as 'done' and credits the associated points to the assigned user.
+ * Prevents rewarding points multiple times for the same task.
+ * 
+ * @route PUT /api/tasks/:id/done
+ * @param {string} id.path.required - The ID of the task to complete
+ * @returns {object} 200 - Success message, updated task and updated user points
+ * @returns {Error} 404 - Task not found
+ * @returns {Error} 400 - Task already completed or update failed
+ */
 router.put('/:id/done', async (req: Request, res: Response) => {
   try {
     const task = await Task.findById(req.params.id);
@@ -50,7 +79,15 @@ router.put('/:id/done', async (req: Request, res: Response) => {
   }
 });
 
-// Get User Points
+/**
+ * GET /api/tasks/user/:id/points
+ * Retrieves the total accumulated points for a specific user.
+ * 
+ * @route GET /api/tasks/user/:id/points
+ * @param {string} id.path.required - The ID of the user
+ * @returns {object} 200 - Contains the points total (e.g. { points: 150 })
+ * @returns {Error} 400 - Database query failed
+ */
 router.get('/user/:id/points', async (req: Request, res: Response) => {
   try {
     const user = await User.findById(req.params.id);
