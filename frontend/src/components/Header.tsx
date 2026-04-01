@@ -1,13 +1,6 @@
-import React from 'react';
-
-/**
- * Header Component
- * Displays the application logo and the current logged-in user profile snippet.
- * This component is stateless and purely presentational.
- */
-export const Header: React.FC = () => {
+const Header = () => {
   return (
-    <header>
+    <header className="app-header">
       <div className="logo">
         <div className="logo-icon">FH</div>
         <span>Familien Hero</span>
@@ -18,3 +11,5 @@ export const Header: React.FC = () => {
     </header>
   );
 };
+
+export default Header;

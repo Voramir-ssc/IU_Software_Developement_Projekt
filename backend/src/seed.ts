@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import User from './models/User';
 import Task from './models/Task';
+import Reward from './models/Reward';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -12,6 +13,7 @@ const seed = async () => {
     // Clear existing data
     await User.deleteMany({});
     await Task.deleteMany({});
+    await Reward.deleteMany({});
 
     // Create Users
     const stefan = await User.create({ name: 'Stefan', role: 'parent', points: 0 });
@@ -29,6 +31,16 @@ const seed = async () => {
     ]);
 
     console.log('Tasks seeded!');
+
+    // Create Rewards
+    await Reward.create([
+      { title: 'Einen Filmabend aussuchen', cost: 150, icon: '🎬' },
+      { title: 'Ein großes Eis essen gehen', cost: 300, icon: '🍦' },
+      { title: 'LEGO Set (nach Wahl)', cost: 600, icon: '🧱' },
+      { title: '1 Stunde länger wach bleiben', cost: 200, icon: '🌙' }
+    ]);
+
+    console.log('Rewards seeded!');
     process.exit(0);
   } catch (err) {
     console.error('Seed error:', err);

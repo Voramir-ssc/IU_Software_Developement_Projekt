@@ -20,7 +20,10 @@ if (process.env.NODE_ENV !== 'test') {
 
 // Routes
 import taskRoutes from './routes/taskRoutes';
+import rewardRoutes from './routes/rewardRoutes';
+
 app.use('/api/tasks', taskRoutes);
+app.use('/api/rewards', rewardRoutes);
 
 /**
  * Endpoint for health checks to ensure the API is reachable.

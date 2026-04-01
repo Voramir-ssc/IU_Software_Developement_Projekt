@@ -6,11 +6,21 @@ Dieses Repository enthält die Fullstack-Webanwendung **"Familien Hero"**, entwi
 "Familien Hero" ist eine interaktive Single Page Application (SPA), die Familien dabei unterstützt, Haushaltsaufgaben spielerisch zu organisieren. Über ein Punktesystem (Gamification) werden insbesondere Kinder (wie Marlene) motiviert, Aufgaben zu übernehmen, während Eltern den Fortschritt im Dashboard verfolgen können.
 
 ### Tech-Stack (MERN)
-- **Frontend:** React.js, TypeScript, Vite
-- **Backend:** Node.js, Express, TypeScript
-- **Datenbank:** MongoDB (NoSQL)
-- **Modellierung:** Mongoose
+- **Frontend:** React.js, TypeScript, Vite, React Router, Lucide Icons
+- **Backend:** Node.js, Express, TypeScript, MongoDB (Mongoose)
+- **Testing:** Vitest (Frontend & Backend)
 - **Vorgehensmodell:** SCRUM (iterativ-inkrementell)
+
+---
+
+## 📂 Dokumentation & Konzept
+Die vollständige Projektdokumentation befindet sich im Verzeichnis `/docs`:
+
+- [Projektkonzept (CONCEPT.md)](./docs/CONCEPT.md) – Problemstellung, Nutzerrollen & Vorteile.
+- [Softwarearchitektur (ARCHITECTURE.md)](./docs/ARCHITECTURE.md) – C4-Modell & Datenmodell.
+- [Wireframes (WIREFRAMES.md)](./docs/WIREFRAMES.md) – UI-Entwürfe & Mockups.
+- [Projektmanagement (MANAGEMENT.md)](./docs/MANAGEMENT.md) – Begründung von SCRUM & Protokoll.
+- [Evaluation (EVALUATION.md)](./docs/EVALUATION.md) – Lessons Learned & Reflexion.
 
 ---
 
@@ -42,53 +52,41 @@ npm install
 
 ## 🏃‍♂️ Anwendung starten
 
-Um die Anwendung Lokal zu testen, müssen sowohl das Backend als auch das Frontend gestartet werden.
-
 ### Schritt A: MongoDB starten
 Stelle sicher, dass dein lokaler MongoDB-Service läuft:
 ```bash
 brew services start mongodb-community@8.0
 ```
 
-### Schritt B: Backend starten
+### Schritt B: Backend starten (inkl. Seeding)
 Im Verzeichnis `/backend`:
 ```bash
-npm run dev
+npm run seed  # Testdaten (Nutzer, Aufgaben, Belohnungen) laden
+npm run dev   # Server starten auf http://localhost:5000
 ```
-Der Server läuft standardmäßig auf `http://localhost:5000`.
 
 ### Schritt C: Frontend starten
 Im Verzeichnis `/frontend`:
 ```bash
-npm run dev
+npm run dev   # App erreichbar unter http://localhost:5173
 ```
-Die Anwendung ist nun unter `http://localhost:5173` erreichbar.
 
 ---
 
-## 🧪 Testen & Demo-Daten
+## 🧪 Testen
+Die Anwendung verfügt über eine automatisierte Testsuite für Frontend und Backend.
 
-Damit die App direkt mit echten Inhalten bespielt wird (Stefan, Alexandra und Marlene), kannst du das Seeding-Skript nutzen.
-
-### 1. Testdaten laden (Seeding)
+### Backend Tests ausführen
 Im Verzeichnis `/backend`:
 ```bash
-npm run seed
+npm test
 ```
-Dies leert die Datenbank und legt neue Test-Nutzer und Aufgaben an.
 
-### 2. Unit-Tests ausführen
-Ein beispielhafter Unit-Test für die Punkte-Logik kann wie folgt ausgeführt werden:
+### Frontend Tests ausführen
+Im Verzeichnis `/frontend`:
 ```bash
-npx tsx src/test_demo.ts
+npm test
 ```
-
----
-
-## 📂 Projektstruktur
-- `/frontend`: React SPA Quellcode & Assets.
-- `/backend`: Node.js Express Server, Routen & MongoDB-Modelle.
-- `/brain`: Konzept-Dokumentation, Wireframes und SCRUM-Protokoll (Artifacts).
 
 ---
 **Autor:** Stefan (voramir)  
