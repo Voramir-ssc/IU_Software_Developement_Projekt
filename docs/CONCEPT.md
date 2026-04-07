@@ -37,8 +37,15 @@ graph TD
 2. **Backend (API):** Node.js Server mit Express. Stellt REST-Endpunkte für die Verwaltung von Nutzern, Aufgaben und Belohnungen bereit.
 3. **Datenbank (MongoDB):** NoSQL-Datenbank zur flexiblen Speicherung von Dokumentstrukturen (Tasks, Users, Rewards).
 
-## 5. Kernfunktionalitäten (Roadmap)
-- **Dashboard:** Zentrale Übersicht über offene Aufgaben und den aktuellen Punktestand.
-- **Aufgabenmanagement:** Erstellen, Zuweisen und Abschließen von Aufgaben.
-- **Belohnungsshop:** Einlösen von Punkten gegen konfigurierbare Belohnungen.
-- **Gamification-Elemente:** Badges und Fortschrittsbalken für Langzeitziele.
+## 5. Kernfunktionalitäten
+- **Dashboard:** Zentrale Übersicht über offene Aufgaben, den API-Status und den LEGO-Fortschritt als Familienziel.
+- **Helden-Profile (Hero-Switch):** Ein personalisierter Zugang für jedes Familienmitglied (Stefan, Alexandra, Marlene) mit individuellen Punkteständen.
+- **Rollenbasierte Ansichten:** 
+    - **Eltern (Admins):** Volle Kontrolle über die Aufgabenerstellung und -zuweisung.
+    - **Kinder (Helden):** Fokus auf Missionen und Belohnungen (eingeschränkte Admin-Rechte).
+- **Aufgabenmanagement:** Dynamische Erstellung und Zuweisung von Haushaltsmissionen.
+- **Belohnungsshop:** Einlösen gesammelter Sterne gegen konfigurierbare Belohnungen.
+- **Gamification-Elemente:** Visuelle Fortschrittsbalken und Star-Badges zur Steigerung der Motivation.
+
+---
+**Zusammenfassend:** "Familien Hero" verwandelt Alltagsroutine in ein gemeinschaftliches Abenteuer und entlastet die Kommunikation innerhalb der Familie.

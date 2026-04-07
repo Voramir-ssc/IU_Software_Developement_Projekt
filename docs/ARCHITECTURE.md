@@ -54,14 +54,15 @@ classDiagram
     class Reward {
         +String title
         +Number cost
-        +Boolean available
+        +String icon
     }
 
-    User "1" -- "0..*" Task : hat_zugewiesen
+    User "1" -- "0..*" Task : ist_zugewiesen
     User "1" -- "0..*" Reward : löst_ein
 ```
 
 ## 4. Technologie-Begründung
-- **SPA (Single Page Application):** Gewährleistet eine flüssige Benutzererfahrung (User Experience) ohne ständiges Neuladen der Seite, was besonders für die Gamification-Elemente wichtig ist.
-- **NoSQL (MongoDB):** Bietet die nötige Flexibilität für zukünftige Erweiterungen (z.B. neue Aufgabentypen oder Achievement-Systeme), ohne starre Schema-Migrationen.
-- **Node.js:** Ermöglicht die Verwendung von TypeScript über den gesamten Stack (End-to-End Type Safety), was die Fehleranfälligkeit reduziert.
+- **SPA (Single Page Application):** Gewährleistet eine flüssige Benutzererfahrung ohne ständiges Neuladen der Seite.
+- **NoSQL (MongoDB):** Bietet die nötige Flexibilität für Dokumentstrukturen (Tasks, Users, Rewards).
+- **Node.js / Port 5001:** Der Wechsel von Standard-Port 5000 auf 5001 erfolgte aufgrund von Port-Überschneidungen mit dem AirPlay-Receiver unter macOS.
+- **End-to-End Type Safety:** Verwendung von TypeScript im gesamten Stack zur Reduzierung von Laufzeitfehlern.

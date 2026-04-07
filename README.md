@@ -15,17 +15,21 @@ Dieses Repository enthält die Fullstack-Webanwendung **"Familien Hero"**, entwi
 ### Tech-Stack (MERN)
 - **Frontend:** React.js, TypeScript, Vite, React Router, Lucide Icons
 - **Backend:** Node.js, Express, TypeScript, MongoDB (Mongoose)
-- **Testing:** Vitest (Frontend & Backend)
+
+---
+
+## 📅 Vorgehensmodell & Methodik
+Das Projekt wurde in einem **synthetischen SCRUM-Rahmen** entwickelt. Die Umsetzung erfolgte in vier zeitlich abgegrenzten **Sprints**, die von der Anforderungsanalyse über die Kern-Implementierung bis hin zur finalen **Präsentation** des funktionsfähigen Prototyps reichten. Diese iterative Vorgehensweise stellte die Qualität der rollenbasierten User Experience sicher.
 
 ---
 
 ## 📂 Dokumentation
 Die vollständige Projektdokumentation befindet sich im Verzeichnis `/docs`:
-- [Projektkonzept (CONCEPT.md)](./docs/CONCEPT.md)
-- [Softwarearchitektur (ARCHITECTURE.md)](./docs/ARCHITECTURE.md)
-- [Wireframes (WIREFRAMES.md)](./docs/WIREFRAMES.md)
-- [Projektmanagement (MANAGEMENT.md)](./docs/MANAGEMENT.md)
-- [Evaluation (EVALUATION.md)](./docs/EVALUATION.md)
+- [Projektmanagement (MANAGEMENT.md)](./docs/MANAGEMENT.md) – SCRUM-Protokoll & Sprints.
+- [Projektkonzept (CONCEPT.md)](./docs/CONCEPT.md) – Problemstellung & Kernfunktionen.
+- [Softwarearchitektur (ARCHITECTURE.md)](./docs/ARCHITECTURE.md) – C4-Modelle & Datenmodell.
+- [Wireframes (WIREFRAMES.md)](./docs/WIREFRAMES.md) – UI-Entwürfe.
+- [Evaluation (EVALUATION.md)](./docs/EVALUATION.md) – Lessons Learned.
 
 ---
 
