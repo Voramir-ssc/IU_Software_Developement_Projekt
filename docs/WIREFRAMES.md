@@ -5,7 +5,7 @@ Dieses Dokument visualisiert die geplanten Oberflächen der Anwendung "Familien 
 ## 1. Dashboard (Hauptansicht)
 Das Dashboard bietet eine schnelle Übersicht über alle anstehenden Aufgaben und den Fortschritt der Familienmitglieder.
 
-![Dashboard Mockup](/Users/stefanschaerl/.gemini/antigravity/brain/9bb994ff-7671-4805-aa15-2a0b6d730505/familien_hero_dashboard_mockup_1775048035756.png)
+![Dashboard Mockup](./assets/dashboard_mockup.png)
 
 ### Kern-Elemente:
 - **Greeting Card:** Motivierender Text ("Guten Morgen, Familie...").
