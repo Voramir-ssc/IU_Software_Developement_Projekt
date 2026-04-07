@@ -10,19 +10,19 @@ const seed = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/familien-hero');
     
-    // Clear existing data
+    // Existierende Daten löschen
     await User.deleteMany({});
     await Task.deleteMany({});
     await Reward.deleteMany({});
 
-    // Create Users
+    // Benutzer erstellen
     const stefan = await User.create({ name: 'Stefan', role: 'parent', points: 0 });
     const alexandra = await User.create({ name: 'Alexandra', role: 'parent', points: 0 });
     const marlene = await User.create({ name: 'Marlene', role: 'child', points: 480 });
 
-    console.log('Users seeded!');
+    console.log('Benutzer erfolgreich angelegt!');
 
-    // Create Tasks
+    // Aufgaben erstellen
     await Task.create([
       { title: 'Geschirrspüler ausräumen', assignedTo: marlene._id, pointsReward: 20, status: 'open' },
       { title: 'Zimmer aufräumen', assignedTo: marlene._id, pointsReward: 50, status: 'open' },
@@ -30,9 +30,9 @@ const seed = async () => {
       { title: 'Einkauf planen', assignedTo: alexandra._id, pointsReward: 10, status: 'done' }
     ]);
 
-    console.log('Tasks seeded!');
+    console.log('Aufgaben erfolgreich angelegt!');
 
-    // Create Rewards
+    // Belohnungen erstellen
     await Reward.create([
       { title: 'Einen Filmabend aussuchen', cost: 150, icon: '🎬' },
       { title: 'Ein großes Eis essen gehen', cost: 300, icon: '🍦' },
@@ -40,10 +40,10 @@ const seed = async () => {
       { title: '1 Stunde länger wach bleiben', cost: 200, icon: '🌙' }
     ]);
 
-    console.log('Rewards seeded!');
+    console.log('Belohnungen erfolgreich angelegt!');
     process.exit(0);
   } catch (err) {
-    console.error('Seed error:', err);
+    console.error('Fehler beim Seeding:', err);
     process.exit(1);
   }
 };

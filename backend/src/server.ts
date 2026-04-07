@@ -11,14 +11,14 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// MongoDB Connection
+// MongoDB Verbindung
 if (process.env.NODE_ENV !== 'test') {
   mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/familien-hero')
-    .then(() => console.log('Connected to MongoDB Atlas'))
-    .catch(err => console.error('MongoDB connection error:', err));
+    .then(() => console.log('Erfolgreich mit MongoDB verbunden'))
+    .catch(err => console.error('Fehler bei der MongoDB-Verbindung:', err));
 }
 
-// Routes
+// Routen-Importe
 import taskRoutes from './routes/taskRoutes';
 import rewardRoutes from './routes/rewardRoutes';
 
@@ -26,25 +26,22 @@ app.use('/api/tasks', taskRoutes);
 app.use('/api/rewards', rewardRoutes);
 
 /**
- * Endpoint for health checks to ensure the API is reachable.
- * Useful for monitoring and initial connection testing from the frontend.
- * 
- * @route GET /api/health
+ * Endpunkt für Health-Checks, um die Erreichbarkeit der API zu prüfen.
+ * Wird vom Frontend verwendet, um den Verbindungsstatus anzuzeigen.
  */
 app.get('/api/health', (req: Request, res: Response) => {
-  res.json({ status: 'ok', message: 'Familien Hero API is running!' });
+  res.json({ status: 'ok', message: 'Familien Hero API ist betriebsbereit!' });
 });
 
 /**
- * Initializes the server on the specified PORT.
- * Only starts listening if not currently in a test environment,
- * preventing 'address already in use' errors during integration tests.
+ * Initialisierung des Servers auf dem in der Umgebung konfigurierten Port.
+ * Startet den Listener nur, wenn keine Testumgebung aktiv ist.
  */
 if (process.env.NODE_ENV !== 'test') {
   app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`Server läuft auf http://localhost:${PORT}`);
   });
 }
 
-// Export the Express app instance for use in integration tests (e.g., vitest / supertest).
+// Export der Express-App für Integrationstests
 export default app;

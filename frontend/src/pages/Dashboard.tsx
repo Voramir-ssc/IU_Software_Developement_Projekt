@@ -12,16 +12,16 @@ interface Task {
 const Dashboard = () => {
   const { currentUser, users } = useUser();
   const [tasks, setTasks] = useState<Task[]>([]);
-  const [apiStatus, setApiStatus] = useState<string>('Connecting...');
+  const [apiStatus, setApiStatus] = useState<string>('Verbinde...');
 
   useEffect(() => {
-    // Health Check
+    // Verbindungsprüfung zum Backend
     fetch(`${API_BASE_URL}/health`)
       .then(res => res.json())
       .then(data => setApiStatus(data.message))
       .catch(() => setApiStatus('Backend Offline'));
 
-    // Fetch Tasks
+    // Aktuelle Aufgaben laden
     fetch(`${API_BASE_URL}/tasks`)
       .then(res => res.json())
       .then(data => setTasks(data))

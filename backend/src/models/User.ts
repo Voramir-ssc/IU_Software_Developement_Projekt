@@ -1,9 +1,13 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
+/**
+ * Interface für das User-Modell.
+ * Repräsentiert ein Familienmitglied (Eltern oder Kind).
+ */
 export interface IUser extends Document {
   name: string;
-  role: 'parent' | 'child';
-  points: number;
+  role: 'parent' | 'child'; // Rolle für Berechtigungen
+  points: number;           // Aktueller Punktestand
 }
 
 const UserSchema: Schema = new Schema({

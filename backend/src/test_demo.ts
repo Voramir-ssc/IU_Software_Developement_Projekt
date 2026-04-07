@@ -2,14 +2,14 @@ import Task from './models/Task';
 import User from './models/User';
 import mongoose from 'mongoose';
 
-// Mocking logic / Simple test demonstration
+// Mocking-Logik / Einfache Test-Demonstration
 export const testPointsLogic = async () => {
   console.log('--- Unit Test: Punkte-Logik ---');
   
   const mockUser = { _id: new mongoose.Types.ObjectId(), name: 'TestUser', points: 100 };
   const mockTask = { title: 'Test Task', pointsReward: 50, status: 'open', assignedTo: mockUser._id };
   
-  // Simulate complete task
+  // Simulation des Aufgabenabschlusses
   console.log(`Vorher: ${mockUser.name} hat ${mockUser.points} Punkte.`);
   
   if (mockTask.status === 'open') {

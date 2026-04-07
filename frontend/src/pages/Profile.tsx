@@ -52,7 +52,7 @@ const Profile = () => {
       </div>
 
       <div className="profile-actions">
-        <button className="card glass logout-btn" onClick={() => alert('Logout (Platzhalter): In einer echten App würdest du jetzt abgemeldet.')}>
+        <button className="card glass logout-btn" onClick={() => alert('Abmeldung: Diese Funktion ist in der aktuellen Demo-Version noch nicht aktiv.')}>
           <LogOut size={20} />
           <span>Abmelden</span>
         </button>

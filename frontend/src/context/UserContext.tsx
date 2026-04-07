@@ -23,6 +23,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
+  // Lädt alle Helden aus der Datenbank
   const fetchUsers = async () => {
     try {
       const res = await fetch(`${API_BASE_URL}/tasks/users`);
@@ -30,18 +31,18 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
         const data = await res.json();
         setUsers(data);
         
-        // Default to 'Stefan' if not already set
+        // Initialer Held: Stefan oder der erste verfügbare Nutzer
         if (!currentUser && data.length > 0) {
           const stefan = data.find((u: User) => u.name === 'Stefan') || data[0];
           setCurrentUser(stefan);
         } else if (currentUser) {
-          // Update current user points if refreshed
+          // Punktestand des aktuellen Helden aktualisieren
           const updatedSelf = data.find((u: User) => u._id === currentUser._id);
           if (updatedSelf) setCurrentUser(updatedSelf);
         }
       }
     } catch (error) {
-      console.error('Failed to fetch users:', error);
+      console.error('Fehler beim Abrufen der Helden:', error);
     } finally {
       setLoading(false);
     }
@@ -67,7 +68,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
 export const useUser = () => {
   const context = useContext(UserContext);
   if (context === undefined) {
-    throw new Error('useUser must be used within a UserProvider');
+    throw new Error('useUser muss innerhalb eines UserProviders verwendet werden');
   }
   return context;
 };

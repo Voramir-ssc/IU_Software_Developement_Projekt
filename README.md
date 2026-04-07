@@ -3,90 +3,74 @@
 Dieses Repository enthält die Fullstack-Webanwendung **"Familien Hero"**, entwickelt als Prüfungsleistung für das IU-Modul DLBSEPPSD01_D.
 
 ## 🚀 Über das Projekt
-"Familien Hero" ist eine interaktive Single Page Application (SPA), die Familien dabei unterstützt, Haushaltsaufgaben spielerisch zu organisieren. Über ein Punktesystem (Gamification) werden insbesondere Kinder (wie Marlene) motiviert, Aufgaben zu übernehmen, während Eltern den Fortschritt im Dashboard verfolgen können.
+"Familien Hero" ist eine interaktive Single Page Application (SPA), die Familien dabei unterstützt, Haushaltsaufgaben spielerisch zu organisieren. Über ein Punktesystem (Gamification) werden insbesondere Kinder motiviert, Aufgaben zu übernehmen, während Eltern den Fortschritt im Dashboard verfolgen können.
+
+### Hauptfunktionen
+- **Drei Helden-Profile**: Stefan (Vater/Admin), Alexandra (Mutter/Admin) und Marlene (Kind/Held).
+- **Hero-Switching**: Einfacher Wechsel zwischen den Profilen zur Demonstration der rollenbasierten UI.
+- **Aufgabenverwaltung**: Erstellung, Zuweisung und Abschluss von Haushaltsaufgaben.
+- **Belohnungssystem**: Einlösen gesammelter Sterne gegen vordefinierte Belohnungen.
+- **LEGO-Fortschritt**: Visuelle Motivationshilfe speziell für das Kind-Profil.
 
 ### Tech-Stack (MERN)
 - **Frontend:** React.js, TypeScript, Vite, React Router, Lucide Icons
 - **Backend:** Node.js, Express, TypeScript, MongoDB (Mongoose)
 - **Testing:** Vitest (Frontend & Backend)
-- **Vorgehensmodell:** SCRUM (iterativ-inkrementell)
 
 ---
 
-## 📂 Dokumentation & Konzept
+## 📂 Dokumentation
 Die vollständige Projektdokumentation befindet sich im Verzeichnis `/docs`:
-
-- [Projektkonzept (CONCEPT.md)](./docs/CONCEPT.md) – Problemstellung, Nutzerrollen & Vorteile.
-- [Softwarearchitektur (ARCHITECTURE.md)](./docs/ARCHITECTURE.md) – C4-Modell & Datenmodell.
-- [Wireframes (WIREFRAMES.md)](./docs/WIREFRAMES.md) – UI-Entwürfe & Mockups.
-- [Projektmanagement (MANAGEMENT.md)](./docs/MANAGEMENT.md) – Begründung von SCRUM & Protokoll.
-- [Evaluation (EVALUATION.md)](./docs/EVALUATION.md) – Lessons Learned & Reflexion.
-
----
-
-## 🛠 Setup & Installation
-
-Stelle sicher, dass **Node.js** (>= 22) und **MongoDB** auf deinem System installiert sind.
-
-### 1. Repository klonen
-```bash
-git clone https://github.com/voramir/IU_Software_Developement_Projekt.git
-cd IU_Software_Developement_Projekt
-```
-
-### 2. Backend vorbereiten
-```bash
-cd backend
-npm install
-# Erstelle eine .env Datei (Beispielwerte sind bereits in .env hinterlegt)
-# MONGO_URI=mongodb://localhost:27017/familien-hero
-```
-
-### 3. Frontend vorbereiten
-```bash
-cd ../frontend
-npm install
-```
+- [Projektkonzept (CONCEPT.md)](./docs/CONCEPT.md)
+- [Softwarearchitektur (ARCHITECTURE.md)](./docs/ARCHITECTURE.md)
+- [Wireframes (WIREFRAMES.md)](./docs/WIREFRAMES.md)
+- [Projektmanagement (MANAGEMENT.md)](./docs/MANAGEMENT.md)
+- [Evaluation (EVALUATION.md)](./docs/EVALUATION.md)
 
 ---
 
-## 🏃‍♂️ Anwendung starten
+## 🛠 Setup & Start (Der schnellste Weg)
 
-### Schritt A: MongoDB starten
-Stelle sicher, dass dein lokaler MongoDB-Service läuft:
-```bash
-brew services start mongodb-community@8.0
-```
+Stelle sicher, dass **Node.js** (>= 22) und **MongoDB** installiert sind und die MongoDB läuft.
 
-### Schritt B: Backend starten (inkl. Seeding)
-Im Verzeichnis `/backend`:
-```bash
-npm run seed  # Testdaten (Nutzer, Aufgaben, Belohnungen) laden
-npm run dev   # Server starten auf http://localhost:5000
-```
+### 1. Schnellstart über Skripte
+Um Backend (inkl. Seeding) und Frontend gleichzeitig zu starten, nutze die bereitgestellten Skripte im Hauptverzeichnis:
 
-### Schritt C: Frontend starten
-Im Verzeichnis `/frontend`:
-```bash
-npm run dev   # App erreichbar unter http://localhost:5173
-```
+- **macOS/Linux:**
+  ```bash
+  chmod +x run.sh
+  ./run.sh
+  ```
+- **Windows:**
+  ```cmd
+  run.cmd
+  ```
+
+### 2. Manueller Start (Alternative)
+Falls die Skripte nicht genutzt werden sollen:
+
+- **Backend:** 
+  ```bash
+  cd backend && npm install
+  npm run seed  # WICHTIG: Erstellt die Helden-Profile
+  npm run dev   # Startet auf Port 5001 (Workaround für macOS AirPlay)
+  ```
+- **Frontend:**
+  ```bash
+  cd frontend && npm install
+  npm run dev   # Erreichbar unter http://localhost:5173
+  ```
+
+> [!NOTE]
+> Das Backend läuft standardmäßig auf **Port 5001**, da Port 5000 unter macOS häufig durch den AirPlay-Receiver blockiert wird.
 
 ---
 
 ## 🧪 Testen
-Die Anwendung verfügt über eine automatisierte Testsuite für Frontend und Backend.
+Die Anwendung verfügt über eine automatisierte Testsuite.
 
-### Backend Tests ausführen
-Im Verzeichnis `/backend`:
-```bash
-npm test
-```
-
-### Frontend Tests ausführen
-Im Verzeichnis `/frontend`:
-```bash
-npm test
-```
+- **Backend:** `cd backend && npm test`
+- **Frontend:** `cd frontend && npm test`
 
 ---
 **Autor:** Stefan (voramir)  

@@ -17,18 +17,19 @@ const Tasks = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [showForm, setShowForm] = useState(false);
   
-  // Form State
+  // Formular-Status
   const [title, setTitle] = useState('');
   const [points, setPoints] = useState(10);
   const [assignedTo, setAssignedTo] = useState('');
 
+  // Daten vom Server laden
   const fetchData = async () => {
-    // Fetch Tasks
+    // Aufgaben abrufen
     const taskRes = await fetch(`${API_BASE_URL}/tasks`);
     const taskData = await taskRes.json();
     setTasks(taskData);
     
-    // Initialize assignedTo if empty and users available
+    // Initialen Helden für die Zuweisung festlegen (bevorzugt Kinder)
     if (users.length > 0 && !assignedTo) {
       setAssignedTo(users.find(u => u.role === 'child')?._id || users[0]._id);
     }
@@ -38,14 +39,16 @@ const Tasks = () => {
     fetchData();
   }, []);
 
+  // Aufgabe als erledigt markieren
   const completeTask = async (id: string) => {
     const res = await fetch(`${API_BASE_URL}/tasks/${id}/done`, { method: 'PUT' });
     if (res.ok) {
       fetchData();
-      refreshUsers(); // Update points in context
+      refreshUsers(); // Punktestand im globalen Context aktualisieren
     }
   };
 
+  // Neues Formular absenden
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const res = await fetch(`${API_BASE_URL}/tasks`, {

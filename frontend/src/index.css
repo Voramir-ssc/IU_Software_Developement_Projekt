@@ -1,3 +1,4 @@
+/* Globale Konfiguration & Variablen */
 :root {
   --primary: #6366f1;
   --primary-dark: #4f46e5;
@@ -30,16 +31,17 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* App-Layout */
 .app-container {
   max-width: 500px;
   margin: 0 auto;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  padding-bottom: 80px; /* Space for bottom nav */
+  padding-bottom: 80px; /* Platz für die untere Navigation */
 }
 
-/* Header */
+/* Header-Bereich */
 .app-header {
   padding: 1.5rem;
   display: flex;
@@ -73,13 +75,13 @@ body {
   font-size: 0.9rem;
 }
 
-/* Main Content */
+/* Hauptinhalt */
 .content {
   flex: 1;
   padding: 1rem;
 }
 
-/* Cards & Glassmorphism */
+/* Karten & Glassmorphism-Effekte */
 .glass {
   background: var(--surface);
   backdrop-filter: var(--glass-blur);
@@ -113,10 +115,10 @@ body {
   border-color: rgba(245, 158, 11, 0.2);
 }
 
-/* Bottom Navigation */
+/* Untere Navigation (Bottom Nav) */
 .bottom-nav {
   position: fixed;
-  bottom: 20px; /* Floating look */
+  bottom: 20px; /* Schwebender Look */
   left: 50%;
   transform: translateX(-50%);
   width: calc(100% - 40px);

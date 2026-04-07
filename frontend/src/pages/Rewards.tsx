@@ -17,7 +17,7 @@ const Rewards = () => {
   const [redeemed, setRedeemed] = useState<string[]>([]);
 
   useEffect(() => {
-    // Fetch Rewards
+    // Belohnungen vom Server abrufen
     fetch(`${API_BASE_URL}/rewards`)
       .then(res => res.json())
       .then(data => setRewards(data))
@@ -26,6 +26,7 @@ const Rewards = () => {
 
   if (!currentUser) return null;
 
+  // Belohnung einlösen
   const redeem = async (reward: Reward) => {
     if (currentUser.points < reward.cost) {
       alert('Nicht genug Sterne! Sammle noch ein paar mehr Helden-Taten.');
@@ -39,7 +40,7 @@ const Rewards = () => {
     });
 
     if (res.ok) {
-      refreshUsers(); // Update points in context
+      refreshUsers(); // Punktestand im globalen Context aktualisieren
       setRedeemed([...redeemed, reward._id]);
       alert(`Glückwunsch! Du hast '${reward.title}' eingelöst! 🎇`);
     } else {

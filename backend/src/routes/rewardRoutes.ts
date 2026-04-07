@@ -4,17 +4,17 @@ import User from '../models/User';
 
 const router = express.Router();
 
-// Get all available rewards
+// Alle verfügbaren Belohnungen abrufen
 router.get('/', async (req: Request, res: Response) => {
   try {
     const rewards = await Reward.find();
     res.json(rewards);
   } catch (err) {
-    res.status(500).json({ message: 'Error fetching rewards' });
+    res.status(500).json({ message: 'Fehler beim Abrufen der Belohnungen' });
   }
 });
 
-// Redeem a reward
+// Belohnung einlösen
 router.post('/redeem', async (req: Request, res: Response) => {
   const { rewardId, userId } = req.body;
   try {
@@ -22,24 +22,24 @@ router.post('/redeem', async (req: Request, res: Response) => {
     const reward = await Reward.findById(rewardId);
 
     if (!user || !reward) {
-      return res.status(404).json({ message: 'User or Reward not found' });
+      return res.status(404).json({ message: 'Benutzer oder Belohnung nicht gefunden' });
     }
 
     if (user.points < reward.cost) {
-      return res.status(400).json({ message: 'Not enough points' });
+      return res.status(400).json({ message: 'Nicht genügend Sterne vorhanden' });
     }
 
-    // Deduct points
+    // Punkte abziehen
     user.points -= reward.cost;
     await user.save();
 
-    res.json({ message: 'Reward redeemed successfully!', remainingPoints: user.points });
+    res.json({ message: 'Belohnung erfolgreich eingelöst!', remainingPoints: user.points });
   } catch (err) {
-    res.status(400).json({ message: 'Error redeeming reward' });
+    res.status(400).json({ message: 'Fehler beim Einlösen der Belohnung' });
   }
 });
 
-// Create a new reward (for setup)
+// Neue Belohnung erstellen (für Setup/Administration)
 router.post('/', async (req: Request, res: Response) => {
   const { title, description, cost, icon } = req.body;
   try {
@@ -47,7 +47,7 @@ router.post('/', async (req: Request, res: Response) => {
     await newReward.save();
     res.status(201).json(newReward);
   } catch (err) {
-    res.status(400).json({ message: 'Error creating reward' });
+    res.status(400).json({ message: 'Fehler beim Erstellen der Belohnung' });
   }
 });
 
