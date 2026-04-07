@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ShoppingBag, CheckCircle2 } from 'lucide-react';
+import { API_BASE_URL } from '../config';
+import { useUser } from '../context/UserContext';
 
 interface Reward {
   _id: string;
@@ -10,34 +12,34 @@ interface Reward {
 }
 
 const Rewards = () => {
+  const { currentUser, refreshUsers } = useUser();
   const [rewards, setRewards] = useState<Reward[]>([]);
-  const [userPoints, setUserPoints] = useState(480); // Placeholder for demo
   const [redeemed, setRedeemed] = useState<string[]>([]);
 
   useEffect(() => {
     // Fetch Rewards
-    fetch('http://localhost:5000/api/rewards')
+    fetch(`${API_BASE_URL}/rewards`)
       .then(res => res.json())
       .then(data => setRewards(data))
       .catch(() => {});
   }, []);
 
+  if (!currentUser) return null;
+
   const redeem = async (reward: Reward) => {
-    if (userPoints < reward.cost) {
+    if (currentUser.points < reward.cost) {
       alert('Nicht genug Sterne! Sammle noch ein paar mehr Helden-Taten.');
       return;
     }
 
-    // In a real app, we'd call /api/rewards/redeem
-    const res = await fetch('http://localhost:5000/api/rewards/redeem', {
+    const res = await fetch(`${API_BASE_URL}/rewards/redeem`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ rewardId: reward._id, userId: 'marlene-static-id' }) // Marlene's ID
+      body: JSON.stringify({ rewardId: reward._id, userId: currentUser._id }) 
     });
 
     if (res.ok) {
-      const data = await res.json();
-      setUserPoints(data.remainingPoints);
+      refreshUsers(); // Update points in context
       setRedeemed([...redeemed, reward._id]);
       alert(`Glückwunsch! Du hast '${reward.title}' eingelöst! 🎇`);
     } else {
@@ -50,7 +52,7 @@ const Rewards = () => {
       <div className="point-hero glass">
         <div className="point-info">
           <span>Dein aktuelles Sternen-Konto</span>
-          <h2>{userPoints} ⭐</h2>
+          <h2>{currentUser.points} ⭐</h2>
         </div>
         <ShoppingBag size={48} className="shop-icon" />
       </div>
@@ -73,7 +75,7 @@ const Rewards = () => {
                 <button 
                   className="redeem-btn" 
                   onClick={() => redeem(reward)}
-                  disabled={userPoints < reward.cost}
+                  disabled={currentUser.points < reward.cost}
                 >
                   Einlösen
                 </button>

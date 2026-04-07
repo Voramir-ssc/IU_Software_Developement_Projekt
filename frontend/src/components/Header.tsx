@@ -1,4 +1,10 @@
+import { useUser } from '../context/UserContext';
+
 const Header = () => {
+  const { currentUser } = useUser();
+
+  if (!currentUser) return null;
+
   return (
     <header className="app-header">
       <div className="logo">
@@ -6,7 +12,9 @@ const Header = () => {
         <span>Familien Hero</span>
       </div>
       <div className="user-profile">
-        <span>Hallo, <strong>Stefan</strong> 👋</span>
+        <span>Hallo, <strong>{currentUser.name}</strong> 
+          {currentUser.role === 'parent' ? ' 👨‍👩‍👧' : ' 👋'}
+        </span>
       </div>
     </header>
   );

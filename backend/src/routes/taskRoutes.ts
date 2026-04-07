@@ -97,4 +97,20 @@ router.get('/user/:id/points', async (req: Request, res: Response) => {
   }
 });
 
+/**
+ * GET /api/tasks/users
+ * Retrieves a list of all users to display points and heroes in the dashboard.
+ * 
+ * @route GET /api/tasks/users
+ * @returns {User[]} 200 - Array of all user objects
+ */
+router.get('/users', async (req: Request, res: Response) => {
+  try {
+    const users = await User.find();
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ message: 'Error fetching users' });
+  }
+});
+
 export default router;

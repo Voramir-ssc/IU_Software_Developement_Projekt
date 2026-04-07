@@ -1,12 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Star, Trophy, Activity } from 'lucide-react';
-
-interface User {
-  _id: string;
-  name: string;
-  role: 'parent' | 'child';
-  points: number;
-}
+import { API_BASE_URL } from '../config';
+import { useUser } from '../context/UserContext';
 
 interface Task {
   _id: string;
@@ -15,27 +10,25 @@ interface Task {
 }
 
 const Dashboard = () => {
-  const [users] = useState<User[]>([]);
+  const { currentUser, users } = useUser();
   const [tasks, setTasks] = useState<Task[]>([]);
   const [apiStatus, setApiStatus] = useState<string>('Connecting...');
 
   useEffect(() => {
     // Health Check
-    fetch('http://localhost:5000/api/health')
+    fetch(`${API_BASE_URL}/health`)
       .then(res => res.json())
       .then(data => setApiStatus(data.message))
       .catch(() => setApiStatus('Backend Offline'));
 
     // Fetch Tasks
-    fetch('http://localhost:5000/api/tasks')
+    fetch(`${API_BASE_URL}/tasks`)
       .then(res => res.json())
       .then(data => setTasks(data))
       .catch(() => {});
-      
-    // Fetch Users (this is usually a separate endpoint, but we can reuse health/tasks for now if we didn't add it)
-    // Actually, we need a /api/users endpoint. Let's assume we'll use the task population or add a user route.
-    // Let's use the seeder's known users for the demo dashboard if needed, or just fetch tasks.
   }, []);
+
+  if (!currentUser) return null;
 
   const marlene = users.find(u => u.name === 'Marlene');
   const marlenePoints = marlene?.points || 480; // Fallback from Seed

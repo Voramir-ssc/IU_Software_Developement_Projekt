@@ -3,6 +3,7 @@ import Layout from './components/Layout';
 import Dashboard from './pages/Dashboard';
 import Tasks from './pages/Tasks';
 import Rewards from './pages/Rewards';
+import Profile from './pages/Profile';
 import './App.css';
 
 function App() {
@@ -12,7 +13,7 @@ function App() {
         <Route index element={<Dashboard />} />
         <Route path="tasks" element={<Tasks />} />
         <Route path="rewards" element={<Rewards />} />
-        <Route path="profile" element={<div>Profil-Ansicht (Demnächst)</div>} />
+        <Route path="profile" element={<Profile />} />
       </Route>
     </Routes>
   );

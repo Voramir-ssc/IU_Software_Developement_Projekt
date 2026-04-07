@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Plus, CheckCircle, Clock } from 'lucide-react';
-
-interface User {
-  _id: string;
-  name: string;
-}
+import { API_BASE_URL } from '../config';
+import { useUser } from '../context/UserContext';
+import type { User } from '../context/UserContext';
 
 interface Task {
   _id: string;
@@ -15,8 +13,8 @@ interface Task {
 }
 
 const Tasks = () => {
+  const { currentUser, users, refreshUsers } = useUser();
   const [tasks, setTasks] = useState<Task[]>([]);
-  const [users, setUsers] = useState<User[]>([]);
   const [showForm, setShowForm] = useState(false);
   
   // Form State
@@ -26,16 +24,14 @@ const Tasks = () => {
 
   const fetchData = async () => {
     // Fetch Tasks
-    const taskRes = await fetch('http://localhost:5000/api/tasks');
+    const taskRes = await fetch(`${API_BASE_URL}/tasks`);
     const taskData = await taskRes.json();
     setTasks(taskData);
-
-    // Fetch Users for assignment
-    const userRes = await fetch('http://localhost:5000/api/tasks'); // Temporary: reuse tasks to get unique users if no users endpoint
-    const userData = await userRes.json();
-    const uniqueUsers = userData.map((t: any) => t.assignedTo).filter((v: any, i: any, a: any) => a.findIndex((u: any) => u._id === v._id) === i);
-    setUsers(uniqueUsers);
-    if (uniqueUsers.length > 0 && !assignedTo) setAssignedTo(uniqueUsers[0]._id);
+    
+    // Initialize assignedTo if empty and users available
+    if (users.length > 0 && !assignedTo) {
+      setAssignedTo(users.find(u => u.role === 'child')?._id || users[0]._id);
+    }
   };
 
   useEffect(() => {
@@ -43,13 +39,16 @@ const Tasks = () => {
   }, []);
 
   const completeTask = async (id: string) => {
-    const res = await fetch(`http://localhost:5000/api/tasks/${id}/done`, { method: 'PUT' });
-    if (res.ok) fetchData();
+    const res = await fetch(`${API_BASE_URL}/tasks/${id}/done`, { method: 'PUT' });
+    if (res.ok) {
+      fetchData();
+      refreshUsers(); // Update points in context
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const res = await fetch('http://localhost:5000/api/tasks', {
+    const res = await fetch(`${API_BASE_URL}/tasks`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ title, pointsReward: points, assignedTo, status: 'open' })
@@ -65,10 +64,12 @@ const Tasks = () => {
     <div className="tasks-page">
       <div className="header-actions">
         <h2>Helden-Missionen</h2>
-        <button className="add-btn" onClick={() => setShowForm(!showForm)}>
-          <Plus size={20} />
-          {showForm ? 'Abbrechen' : 'Neue Aufgabe'}
-        </button>
+        {currentUser?.role === 'parent' && (
+          <button className="add-btn" onClick={() => setShowForm(!showForm)}>
+            <Plus size={20} />
+            {showForm ? 'Abbrechen' : 'Neue Aufgabe'}
+          </button>
+        )}
       </div>
 
       {showForm && (
