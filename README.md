@@ -3,92 +3,78 @@
 Dieses Repository enthält die Fullstack-Webanwendung **"Familien Hero"**, entwickelt als Prüfungsleistung für das IU-Modul DLBSEPPSD01_D.
 
 ## 🚀 Über das Projekt
-"Familien Hero" ist eine interaktive Single Page Application (SPA), die Familien dabei unterstützt, Haushaltsaufgaben spielerisch zu organisieren. Über ein Punktesystem (Gamification) werden insbesondere Kinder (wie Marlene) motiviert, Aufgaben zu übernehmen, während Eltern den Fortschritt im Dashboard verfolgen können.
+"Familien Hero" ist eine interaktive Single Page Application (SPA), die Familien dabei unterstützt, Haushaltsaufgaben spielerisch zu organisieren. Über ein Punktesystem (Gamification) werden insbesondere Kinder motiviert, Aufgaben zu übernehmen, während Eltern den Fortschritt im Dashboard verfolgen können.
+
+### Hauptfunktionen
+- **Drei Helden-Profile**: Stefan (Vater/Admin), Alexandra (Mutter/Admin) und Marlene (Kind/Held).
+- **Hero-Switching**: Einfacher Wechsel zwischen den Profilen zur Demonstration der rollenbasierten UI.
+- **Aufgabenverwaltung**: Erstellung, Zuweisung und Abschluss von Haushaltsaufgaben.
+- **Belohnungssystem**: Einlösen gesammelter Sterne gegen vordefinierte Belohnungen.
+- **LEGO-Fortschritt**: Visuelle Motivationshilfe speziell für das Kind-Profil.
 
 ### Tech-Stack (MERN)
-- **Frontend:** React.js, TypeScript, Vite
-- **Backend:** Node.js, Express, TypeScript
-- **Datenbank:** MongoDB (NoSQL)
-- **Modellierung:** Mongoose
-- **Vorgehensmodell:** SCRUM (iterativ-inkrementell)
+- **Frontend:** React.js, TypeScript, Vite, React Router, Lucide Icons
+- **Backend:** Node.js, Express, TypeScript, MongoDB (Mongoose)
 
 ---
 
-## 🛠 Setup & Installation
-
-Stelle sicher, dass **Node.js** (>= 22) und **MongoDB** auf deinem System installiert sind.
-
-### 1. Repository klonen
-```bash
-git clone https://github.com/voramir/IU_Software_Developement_Projekt.git
-cd IU_Software_Developement_Projekt
-```
-
-### 2. Backend vorbereiten
-```bash
-cd backend
-npm install
-# Erstelle eine .env Datei (Beispielwerte sind bereits in .env hinterlegt)
-# MONGO_URI=mongodb://localhost:27017/familien-hero
-```
-
-### 3. Frontend vorbereiten
-```bash
-cd ../frontend
-npm install
-```
+## 📅 Vorgehensmodell & Methodik
+Das Projekt wurde in einem **synthetischen SCRUM-Rahmen** entwickelt. Die Umsetzung erfolgte in vier zeitlich abgegrenzten **Sprints**, die von der Anforderungsanalyse über die Kern-Implementierung bis hin zur finalen **Präsentation** des funktionsfähigen Prototyps reichten. Diese iterative Vorgehensweise stellte die Qualität der rollenbasierten User Experience sicher.
 
 ---
 
-## 🏃‍♂️ Anwendung starten
-
-Um die Anwendung Lokal zu testen, müssen sowohl das Backend als auch das Frontend gestartet werden.
-
-### Schritt A: MongoDB starten
-Stelle sicher, dass dein lokaler MongoDB-Service läuft:
-```bash
-brew services start mongodb-community@8.0
-```
-
-### Schritt B: Backend starten
-Im Verzeichnis `/backend`:
-```bash
-npm run dev
-```
-Der Server läuft standardmäßig auf `http://localhost:5000`.
-
-### Schritt C: Frontend starten
-Im Verzeichnis `/frontend`:
-```bash
-npm run dev
-```
-Die Anwendung ist nun unter `http://localhost:5173` erreichbar.
+## 📂 Dokumentation
+Die vollständige Projektdokumentation befindet sich im Verzeichnis `/docs`:
+- [Projektmanagement (MANAGEMENT.md)](./docs/MANAGEMENT.md) – SCRUM-Protokoll & Sprints.
+- [Projektkonzept (CONCEPT.md)](./docs/CONCEPT.md) – Problemstellung & Kernfunktionen.
+- [Softwarearchitektur (ARCHITECTURE.md)](./docs/ARCHITECTURE.md) – C4-Modelle & Datenmodell.
+- [Wireframes (WIREFRAMES.md)](./docs/WIREFRAMES.md) – UI-Entwürfe.
+- [Evaluation (EVALUATION.md)](./docs/EVALUATION.md) – Lessons Learned.
 
 ---
 
-## 🧪 Testen & Demo-Daten
+## 🛠 Setup & Start (Der schnellste Weg)
 
-Damit die App direkt mit echten Inhalten bespielt wird (Stefan, Alexandra und Marlene), kannst du das Seeding-Skript nutzen.
+Stelle sicher, dass **Node.js** (>= 22) und **MongoDB** installiert sind und die MongoDB läuft.
 
-### 1. Testdaten laden (Seeding)
-Im Verzeichnis `/backend`:
-```bash
-npm run seed
-```
-Dies leert die Datenbank und legt neue Test-Nutzer und Aufgaben an.
+### 1. Schnellstart über Skripte
+Um Backend (inkl. Seeding) und Frontend gleichzeitig zu starten, nutze die bereitgestellten Skripte im Hauptverzeichnis:
 
-### 2. Unit-Tests ausführen
-Ein beispielhafter Unit-Test für die Punkte-Logik kann wie folgt ausgeführt werden:
-```bash
-npx tsx src/test_demo.ts
-```
+- **macOS/Linux:**
+  ```bash
+  chmod +x run.sh
+  ./run.sh
+  ```
+- **Windows:**
+  ```cmd
+  run.cmd
+  ```
+
+### 2. Manueller Start (Alternative)
+Falls die Skripte nicht genutzt werden sollen:
+
+- **Backend:** 
+  ```bash
+  cd backend && npm install
+  npm run seed  # WICHTIG: Erstellt die Helden-Profile
+  npm run dev   # Startet auf Port 5001 (Workaround für macOS AirPlay)
+  ```
+- **Frontend:**
+  ```bash
+  cd frontend && npm install
+  npm run dev   # Erreichbar unter http://localhost:5173
+  ```
+
+> [!NOTE]
+> Das Backend läuft standardmäßig auf **Port 5001**, da Port 5000 unter macOS häufig durch den AirPlay-Receiver blockiert wird.
 
 ---
 
-## 📂 Projektstruktur
-- `/frontend`: React SPA Quellcode & Assets.
-- `/backend`: Node.js Express Server, Routen & MongoDB-Modelle.
-- `/brain`: Konzept-Dokumentation, Wireframes und SCRUM-Protokoll (Artifacts).
+## 🧪 Testen
+Die Anwendung verfügt über eine automatisierte Testsuite.
+
+- **Backend:** `cd backend && npm test`
+- **Frontend:** `cd frontend && npm test`
 
 ---
 **Autor:** Stefan (voramir)  

@@ -1,27 +1,21 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Header } from './components/Header';
+import { Routes, Route } from 'react-router-dom';
+import Layout from './components/Layout';
 import Dashboard from './pages/Dashboard';
-import TaskCreate from './pages/TaskCreate';
+import Tasks from './pages/Tasks';
+import Rewards from './pages/Rewards';
+import Profile from './pages/Profile';
+import './App.css';
 
-/**
- * Hauptkomponente der Anwendung
- * Konfiguriert die Routing-Struktur fuer die Single Page Application (SPA).
- * Ermoeglicht die Navigation zwischen dem Dashboard und dem Formular zur Aufgabenerstellung.
- */
 function App() {
   return (
-    <Router>
-      <div className="app-container">
-        <Header />
-        
-        <main className="content" style={{ padding: '2rem' }}>
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/create" element={<TaskCreate />} />
-          </Routes>
-        </main>
-      </div>
-    </Router>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Dashboard />} />
+        <Route path="tasks" element={<Tasks />} />
+        <Route path="rewards" element={<Rewards />} />
+        <Route path="profile" element={<Profile />} />
+      </Route>
+    </Routes>
   );
 }
 

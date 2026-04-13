@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import User from './models/User';
 import Task from './models/Task';
+import Reward from './models/Reward';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -9,18 +10,19 @@ const seed = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/familien-hero');
     
-    // Existierende Daten bereinigen
+    // Existierende Daten löschen
     await User.deleteMany({});
     await Task.deleteMany({});
+    await Reward.deleteMany({});
 
-    // Benutzer erstellen (Beispielkonfiguration fuer IU Projekt)
+    // Benutzer erstellen
     const stefan = await User.create({ name: 'Stefan', role: 'parent', points: 0 });
     const alexandra = await User.create({ name: 'Alexandra', role: 'parent', points: 0 });
     const marlene = await User.create({ name: 'Marlene', role: 'child', points: 480 });
 
-    console.log('Datenbank-Seeding fuer Benutzer abgeschlossen!');
+    console.log('Benutzer erfolgreich angelegt!');
 
-    // Aufgaben erstellen (Initialer Stand)
+    // Aufgaben erstellen
     await Task.create([
       { title: 'Geschirrspüler ausräumen', assignedTo: marlene._id, pointsReward: 20, status: 'open' },
       { title: 'Zimmer aufräumen', assignedTo: marlene._id, pointsReward: 50, status: 'open' },
@@ -28,7 +30,17 @@ const seed = async () => {
       { title: 'Einkauf planen', assignedTo: alexandra._id, pointsReward: 10, status: 'done' }
     ]);
 
-    console.log('Datenbank-Seeding fuer Aufgaben abgeschlossen!');
+    console.log('Aufgaben erfolgreich angelegt!');
+
+    // Belohnungen erstellen
+    await Reward.create([
+      { title: 'Einen Filmabend aussuchen', cost: 150, icon: '🎬' },
+      { title: 'Ein großes Eis essen gehen', cost: 300, icon: '🍦' },
+      { title: 'LEGO Set (nach Wahl)', cost: 600, icon: '🧱' },
+      { title: '1 Stunde länger wach bleiben', cost: 200, icon: '🌙' }
+    ]);
+
+    console.log('Belohnungen erfolgreich angelegt!');
     process.exit(0);
   } catch (err) {
     console.error('Fehler beim Seeding:', err);
