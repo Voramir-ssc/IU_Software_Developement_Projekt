@@ -7,6 +7,10 @@ echo.
 echo 1. Wechsle ins Backend...
 cd backend
 
+echo 1.5. Starte lokale In-Memory-Datenbank...
+start "Familien Hero Database" cmd /k "npx tsx src/start-db.ts"
+timeout /t 5 /nobreak >nul
+
 echo 2. Fuehre Seed-Skript aus (Testdaten laden)...
 call npm run seed
 

@@ -16,6 +16,11 @@ cd "$(dirname "$0")" || exit
 
 echo "1. Wechsle ins Backend..."
 cd backend || exit
+
+echo "1.5. Starte lokale In-Memory-Datenbank in neuem Fenster..."
+osascript -e 'tell app "Terminal" to do script "cd \"'$(pwd)'\" && npx tsx src/start-db.ts"'
+sleep 5
+
 echo "2. Fuehre Seed-Skript aus (Testdaten laden)..."
 npm run seed
 
