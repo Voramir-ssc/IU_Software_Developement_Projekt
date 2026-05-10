@@ -1,6 +1,12 @@
 import { useUser } from '../context/UserContext';
 import { ShieldCheck, Baby, LogOut, CheckCircle2 } from 'lucide-react';
 
+/**
+ * Profil-Seite (Profile).
+ * Zeigt die Informationen des aktuellen Benutzers an und ermöglicht den Wechsel zwischen den Familienmitgliedern.
+ * 
+ * @returns {JSX.Element} Die Profil-Ansicht.
+ */
 const Profile = () => {
   const { currentUser, users, setCurrentUser } = useUser();
 

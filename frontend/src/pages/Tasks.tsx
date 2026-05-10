@@ -12,6 +12,13 @@ interface Task {
   status: 'open' | 'done';
 }
 
+/**
+ * Aufgaben-Übersichtsseite (Tasks).
+ * Zeigt eine Liste aller aktuellen Missionen an und erlaubt Administratoren (Eltern) das Erstellen neuer Aufgaben.
+ * Aufgaben können hier direkt als erledigt markiert werden.
+ * 
+ * @returns {JSX.Element} Die Aufgabenliste mit Erstellungs-Formular.
+ */
 const Tasks = () => {
   const { currentUser, users, refreshUsers } = useUser();
   const [tasks, setTasks] = useState<Task[]>([]);

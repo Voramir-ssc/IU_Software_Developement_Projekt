@@ -9,6 +9,13 @@ interface Task {
   status: 'open' | 'done';
 }
 
+/**
+ * Haupt-Dashboard der Anwendung.
+ * Bietet eine schnelle Übersicht über offene Aufgaben, den API-Status und den Fortschritt (Punkte) der Familienmitglieder.
+ * Lädt asynchron Daten vom Backend, um den Systemstatus anzuzeigen.
+ * 
+ * @returns {JSX.Element | null} Die Dashboard-Ansicht oder null, falls kein Benutzer angemeldet ist.
+ */
 const Dashboard = () => {
   const { currentUser, users } = useUser();
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -25,7 +32,7 @@ const Dashboard = () => {
     fetch(`${API_BASE_URL}/tasks`)
       .then(res => res.json())
       .then(data => setTasks(data))
-      .catch(() => {});
+      .catch(() => { });
   }, []);
 
   if (!currentUser) return null;
@@ -41,7 +48,7 @@ const Dashboard = () => {
           <h3>Offene Aufgaben</h3>
           <div className="value">{tasks.filter(t => t.status === 'open').length}</div>
         </div>
-        
+
         <div className="card marlene-special">
           <Star size={24} className="card-icon" fill="#f59e0b" color="#f59e0b" />
           <h3>Marlenes Super-Punkte</h3>
@@ -72,14 +79,14 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="hero-card">
-            <div className="hero-avatar" style={{background: '#ec4899'}}>A</div>
+            <div className="hero-avatar" style={{ background: '#ec4899' }}>A</div>
             <div className="hero-info">
               <h4>Alexandra</h4>
               <span>Mutter & Admin</span>
             </div>
           </div>
           <div className="hero-card">
-            <div className="hero-avatar" style={{background: '#f59e0b'}}>M</div>
+            <div className="hero-avatar" style={{ background: '#f59e0b' }}>M</div>
             <div className="hero-info">
               <h4>Marlene (8)</h4>
               <span>Kleine Heldin</span>

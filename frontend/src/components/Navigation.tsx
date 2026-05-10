@@ -1,6 +1,12 @@
 import { NavLink } from 'react-router-dom';
 import { Home, ClipboardList, Gift, User } from 'lucide-react';
 
+/**
+ * Untere Navigationsleiste der mobilen Web-App.
+ * Ermöglicht den schnellen Wechsel zwischen den Hauptseiten: Home, Aufgaben, Belohnungen und Profil.
+ * 
+ * @returns {JSX.Element} Die gerenderte Navigationsleiste mit Lucide-Icons.
+ */
 const Navigation = () => {
   return (
     <nav className="bottom-nav">

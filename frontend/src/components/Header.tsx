@@ -1,5 +1,11 @@
 import { useUser } from '../context/UserContext';
 
+/**
+ * Header-Komponente der Anwendung.
+ * Zeigt das Logo und eine personalisierte Begrüßung basierend auf dem aktuellen Benutzer an.
+ * 
+ * @returns {JSX.Element | null} Die gerenderte Header-Leiste oder null, falls kein Benutzer angemeldet ist.
+ */
 const Header = () => {
   const { currentUser } = useUser();
 

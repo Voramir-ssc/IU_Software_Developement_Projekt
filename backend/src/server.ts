@@ -26,8 +26,14 @@ app.use('/api/tasks', taskRoutes);
 app.use('/api/rewards', rewardRoutes);
 
 /**
- * Endpunkt für Health-Checks, um die Erreichbarkeit der API zu prüfen.
- * Wird vom Frontend verwendet, um den Verbindungsstatus anzuzeigen.
+ * @swagger
+ * /api/health:
+ *   get:
+ *     summary: API Health Check
+ *     description: Endpunkt für Health-Checks, um die Erreichbarkeit der API zu prüfen. Wird vom Frontend verwendet, um den Verbindungsstatus anzuzeigen.
+ *     responses:
+ *       200:
+ *         description: API ist betriebsbereit.
  */
 app.get('/api/health', (req: Request, res: Response) => {
   res.json({ status: 'ok', message: 'Familien Hero API ist betriebsbereit!' });
@@ -36,6 +42,9 @@ app.get('/api/health', (req: Request, res: Response) => {
 /**
  * Initialisierung des Servers auf dem in der Umgebung konfigurierten Port.
  * Startet den Listener nur, wenn keine Testumgebung aktiv ist.
+ * 
+ * @function
+ * @name startServer
  */
 if (process.env.NODE_ENV !== 'test') {
   app.listen(PORT, () => {

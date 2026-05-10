@@ -14,9 +14,12 @@ interface StatsGridProps {
  * - Derzeitige Punkte des Kindes (Gamification-Element)
  * - Aktueller API-Status
  * 
- * @param props.tasks - Array aller Aufgaben
- * @param props.marlenePoints - Aktueller Punktestand des Kindes
- * @param props.apiStatus - Verbindungsstatus zum Backend
+ * @component
+ * @param {StatsGridProps} props - Die Props für die Komponente
+ * @param {Task[]} props.tasks - Array aller Aufgaben
+ * @param {number} props.marlenePoints - Aktueller Punktestand des Kindes
+ * @param {string} props.apiStatus - Verbindungsstatus zum Backend
+ * @returns {JSX.Element} Das gerenderte Statistik-Grid
  */
 export const StatsGrid: React.FC<StatsGridProps> = ({ tasks, marlenePoints, apiStatus }) => {
   const openTasksCount = tasks.filter(t => t.status === 'open').length;

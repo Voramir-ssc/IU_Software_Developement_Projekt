@@ -3,9 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import type { User } from '../types';
 
 /**
- * Seite zur Aufgabenerstellung
+ * Seite zur Aufgabenerstellung (TaskCreate).
  * Bietet ein Formular zum Anlegen neuer Aufgaben.
  * Demonstriert die "Eingabe von Daten und deren Verarbeitung", wie in der Aufgabenstellung gefordert.
+ * 
+ * @returns {JSX.Element} Das Formular zur Aufgabenerstellung.
  */
 const TaskCreate: React.FC = () => {
   const navigate = useNavigate();

@@ -11,6 +11,12 @@ interface Reward {
   icon: string;
 }
 
+/**
+ * Belohnungs-Shop (Rewards).
+ * Zeigt alle verfügbaren Belohnungen an und ermöglicht das Einlösen, sofern genügend Sterne vorhanden sind.
+ * 
+ * @returns {JSX.Element | null} Die Rewards-Seite oder null, falls kein Benutzer angemeldet ist.
+ */
 const Rewards = () => {
   const { currentUser, refreshUsers } = useUser();
   const [rewards, setRewards] = useState<Reward[]>([]);

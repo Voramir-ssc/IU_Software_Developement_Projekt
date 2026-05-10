@@ -4,13 +4,24 @@ import User from '../models/User';
 const router = express.Router();
 
 /**
- * GET /api/users
- * Ruft eine Liste aller Benutzer aus der Datenbank ab.
- * Wird verwendet, um Suchfelder oder Zuweisungs-Dropdowns im Frontend zu fuellen.
- * 
- * @route GET /api/users
- * @returns {User[]} 200 - Array von Benutzer-Objekten
- * @returns {Error} 500 - Interner Serverfehler
+ * @swagger
+ * tags:
+ *   name: Users
+ *   description: API-Endpunkte zur Abfrage von Benutzern (Helden)
+ */
+
+/**
+ * @swagger
+ * /api/users:
+ *   get:
+ *     summary: Ruft eine Liste aller Benutzer ab
+ *     tags: [Users]
+ *     description: Ruft eine Liste aller Benutzer aus der Datenbank ab. Wird verwendet, um Suchfelder oder Zuweisungs-Dropdowns im Frontend zu füllen.
+ *     responses:
+ *       200:
+ *         description: Ein Array von Benutzer-Objekten.
+ *       500:
+ *         description: Interner Serverfehler beim Abrufen der Benutzer.
  */
 router.get('/', async (req: Request, res: Response) => {
   try {

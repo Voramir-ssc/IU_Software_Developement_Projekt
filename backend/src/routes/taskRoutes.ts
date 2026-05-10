@@ -5,11 +5,24 @@ import User from '../models/User';
 const router = express.Router();
 
 /**
- * GET /api/tasks
- * Ruft eine Liste aller Aufgaben aus der Datenbank ab.
- * Das Feld 'assignedTo' wird mit dem Namen und der Rolle des Benutzers befüllt.
- * 
- * @returns {Task[]} 200 - Array von Aufgaben-Objekten
+ * @swagger
+ * tags:
+ *   name: Tasks
+ *   description: API-Endpunkte zur Verwaltung von Aufgaben (Tasks)
+ */
+
+/**
+ * @swagger
+ * /api/tasks:
+ *   get:
+ *     summary: Ruft eine Liste aller Aufgaben ab
+ *     tags: [Tasks]
+ *     description: Ruft eine Liste aller Aufgaben aus der Datenbank ab. Das Feld 'assignedTo' wird mit dem Namen und der Rolle des Benutzers befüllt.
+ *     responses:
+ *       200:
+ *         description: Ein Array von Aufgaben-Objekten.
+ *       500:
+ *         description: Fehler beim Abrufen der Aufgaben.
  */
 router.get('/', async (req: Request, res: Response) => {
   try {
@@ -21,13 +34,35 @@ router.get('/', async (req: Request, res: Response) => {
 });
 
 /**
- * POST /api/tasks
- * Erstellt eine neue Aufgabe und weist sie einem Benutzer zu.
- * 
- * @param {string} title.body.required - Titel der Aufgabe
- * @param {string} assignedTo.body.required - Benutzer-ID des Zuständigen
- * @param {number} pointsReward.body.required - Sterne-Belohnung
- * @returns {Task} 201 - Das neu erstellte Aufgaben-Objekt
+ * @swagger
+ * /api/tasks:
+ *   post:
+ *     summary: Neue Aufgabe erstellen
+ *     tags: [Tasks]
+ *     description: Erstellt eine neue Aufgabe und weist sie einem Benutzer zu.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *                 description: Titel der Aufgabe
+ *               description:
+ *                 type: string
+ *               assignedTo:
+ *                 type: string
+ *                 description: Benutzer-ID des Zuständigen
+ *               pointsReward:
+ *                 type: number
+ *                 description: Sterne-Belohnung
+ *     responses:
+ *       201:
+ *         description: Das neu erstellte Aufgaben-Objekt.
+ *       400:
+ *         description: Fehler beim Erstellen der Aufgabe.
  */
 router.post('/', async (req: Request, res: Response) => {
   const { title, description, assignedTo, pointsReward } = req.body;
@@ -41,9 +76,26 @@ router.post('/', async (req: Request, res: Response) => {
 });
 
 /**
- * PUT /api/tasks/:id/done
- * Markiert eine Aufgabe als 'erledigt' und schreibt die Punkte dem Benutzer gut.
- * Verhindert mehrfache Gutschriften für dieselbe Aufgabe.
+ * @swagger
+ * /api/tasks/{id}/done:
+ *   put:
+ *     summary: Aufgabe als erledigt markieren
+ *     tags: [Tasks]
+ *     description: Markiert eine Aufgabe als 'erledigt' und schreibt die Punkte dem Benutzer gut. Verhindert mehrfache Gutschriften für dieselbe Aufgabe.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Die ID der Aufgabe
+ *     responses:
+ *       200:
+ *         description: Aufgabe abgeschlossen und Punkte vergeben.
+ *       400:
+ *         description: Aufgabe bereits abgeschlossen oder Fehler beim Aktualisieren.
+ *       404:
+ *         description: Aufgabe nicht gefunden.
  */
 router.put('/:id/done', async (req: Request, res: Response) => {
   try {
@@ -69,8 +121,24 @@ router.put('/:id/done', async (req: Request, res: Response) => {
 });
 
 /**
- * GET /api/tasks/user/:id/points
- * Ruft den aktuellen Punktestand eines spezifischen Benutzers ab.
+ * @swagger
+ * /api/tasks/user/{id}/points:
+ *   get:
+ *     summary: Punktestand eines Benutzers abrufen
+ *     tags: [Tasks]
+ *     description: Ruft den aktuellen Punktestand eines spezifischen Benutzers ab.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Die ID des Benutzers
+ *     responses:
+ *       200:
+ *         description: Der Punktestand des Benutzers.
+ *       400:
+ *         description: Fehler beim Abrufen des Punktestands.
  */
 router.get('/user/:id/points', async (req: Request, res: Response) => {
   try {
@@ -82,8 +150,17 @@ router.get('/user/:id/points', async (req: Request, res: Response) => {
 });
 
 /**
- * GET /api/tasks/users
- * Ruft eine Liste aller Benutzer ab, um Helden im Dashboard anzuzeigen.
+ * @swagger
+ * /api/tasks/users:
+ *   get:
+ *     summary: Alle Benutzer abrufen
+ *     tags: [Tasks]
+ *     description: Ruft eine Liste aller Benutzer ab, um Helden im Dashboard anzuzeigen.
+ *     responses:
+ *       200:
+ *         description: Eine Liste aller Benutzer.
+ *       500:
+ *         description: Fehler beim Abrufen der Helden.
  */
 router.get('/users', async (req: Request, res: Response) => {
   try {
