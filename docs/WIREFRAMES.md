@@ -3,15 +3,17 @@
 Dieses Dokument visualisiert die geplanten Oberflächen der Anwendung "Familien Hero". Der Fokus liegt auf einer intuitiven, spielerischen Benutzeroberfläche (Gamification).
 
 ## 1. Dashboard (Hauptansicht)
-Das Dashboard bietet eine schnelle Übersicht über alle anstehenden Aufgaben und den Fortschritt der Familienmitglieder.
+Das Dashboard bietet eine schnelle Übersicht über alle relevanten Kennzahlen und Familienmitglieder.
 
 ![Dashboard Mockup](./assets/dashboard_mockup.png)
 
 ### Kern-Elemente:
-- **Greeting Card:** Motivierender Text ("Guten Morgen, Familie...").
-- **Task Cards:** Horizontale oder Grid-Übersicht der Aufgaben mit Titel, Zuständigkeit und Punkte-Belohnung.
-- **Hero Stats:** Ein prominenter "Star Counter" zeigt den Punktestand des angemeldeten Kindes (z.B. Marlene) sowie das nächste große Ziel (Sammelziel für Belohnung).
-- **Navigation:** Untere Navigationsleiste für schnelles Wechseln zwischen Home, Aufgaben, Belohnungen und Profil.
+- **Stats Grid (Kacheln):** Drei prominente Kacheln oben:
+  1. Anzahl der "Offenen Aufgaben"
+  2. "Marlenes Super-Punkte" (inkl. Fortschrittsbalken zum nächsten Ziel, z.B. LEGO Set)
+  3. Aktueller "API Status"
+- **Die Helden der Familie:** Eine vertikale Liste aller registrierten Familienmitglieder (Stefan, Alexandra, Marlene) mit Avatar und Rolle.
+- **Navigation:** Untere oder seitliche Navigationsleiste für schnelles Wechseln zwischen Home, Aufgaben, Belohnungen und Profil.
 
 ## 2. Aufgaben-Verwaltung (Wireframe)
 Hier können Eltern neue Aufgaben anlegen und bearbeiten.
