@@ -24,9 +24,9 @@ graph TD
         
         subgraph "Helden der Familie"
             direction TB
-            H1((S)) --- HT1[Stefan - Vater & Admin]
-            H2((A)) --- HT2[Alexandra - Mutter & Admin]
-            H3((M)) --- HT3[Marlene (8) - Kleine Heldin]
+            H1((S)) --- HT1["Stefan - Vater & Admin"]
+            H2((A)) --- HT2["Alexandra - Mutter & Admin"]
+            H3((M)) --- HT3["Marlene (8) - Kleine Heldin"]
         end
         
         Header --> Stats
@@ -53,15 +53,15 @@ graph TD
         
         subgraph "Task List (Open)"
             direction TB
-            T1[Tisch decken<br/>10 ★ - Zugewiesen an: S] --- B1[Button: Erledigt!]
-            T2[Müll rausbringen<br/>15 ★ - Zugewiesen an: M] --- B2[Button: Erledigt!]
+            T1["Tisch decken<br/>10 ★ - Zugewiesen an: S"] --- B1["Button: Erledigt!"]
+            T2["Müll rausbringen<br/>15 ★ - Zugewiesen an: M"] --- B2["Button: Erledigt!"]
         end
         
-        A2[Header: Erledigte Missionen]
+        A2["Header: Erledigte Missionen"]
         
         subgraph "Task List (Done)"
             direction TB
-            T3[Hausaufgaben<br/>20 ★ - Erledigt]
+            T3["Hausaufgaben<br/>20 ★ - Erledigt"]
         end
     end
 ```
@@ -76,15 +76,15 @@ graph TD
     subgraph "Screen: Neue Mission erstellen"
         direction TB
         
-        F1[Input: Was gibt es zu tun? (Titel)]
-        F2[Textarea: Details & Beschreibung]
+        F1["Input: Was gibt es zu tun? (Titel)"]
+        F2["Textarea: Details & Beschreibung"]
         
         subgraph "Auswahl: Zuständigkeit"
-            R1(Stefan) --- R2(Alexandra) --- R3(Marlene)
+            R1("Stefan") --- R2("Alexandra") --- R3("Marlene")
         end
         
-        F3[Slider/Input: Belohnung (Sterne)]
-        B[Button: Heldentat anlegen]
+        F3["Slider/Input: Belohnung (Sterne)"]
+        B["Button: Heldentat anlegen"]
         
         F1 --> F2 --> Auswahl --> F3 --> B
     end
@@ -100,13 +100,13 @@ graph TD
     subgraph "Screen: Belohnungs-Shop"
         direction TB
         
-        P[Hero Stats: Dein aktuelles Sternen-Konto]
+        P["Hero Stats: Dein aktuelles Sternen-Konto"]
         
         subgraph "Rewards Grid"
             direction LR
-            R1[Icon 🎮<br/>1h Extra Nintendo<br/>Kosten: 50 ★<br/>Button: Einlösen]
-            R2[Icon 🍦<br/>Eis essen gehen<br/>Kosten: 100 ★<br/>Button: Eingelöst (Deaktiviert)]
-            R3[Icon 🧱<br/>Kleines LEGO Set<br/>Kosten: 600 ★<br/>Button: Einlösen (Deaktiviert falls Punkte < 600)]
+            R1["Icon 🎮<br/>1h Extra Nintendo<br/>Kosten: 50 ★<br/>Button: Einlösen"]
+            R2["Icon 🍦<br/>Eis essen gehen<br/>Kosten: 100 ★<br/>Button: Eingelöst (Deaktiviert)"]
+            R3["Icon 🧱<br/>Kleines LEGO Set<br/>Kosten: 600 ★<br/>Button: Einlösen (Deaktiviert falls Punkte < 600)"]
         end
     end
 ```
@@ -121,13 +121,13 @@ graph TD
     subgraph "Screen: Profil"
         direction TB
         
-        P1[Aktueller Held: Avatar, Name, Rolle, Sterne]
+        P1["Aktueller Held: Avatar, Name, Rolle, Sterne"]
         
         subgraph "Hero Switcher"
             direction TB
-            S1[Stefan (Eltern)]
-            S2[Alexandra (Eltern)]
-            S3[Marlene (Kind) - ACTIVE]
+            S1["Stefan (Eltern)"]
+            S2["Alexandra (Eltern)"]
+            S3["Marlene (Kind) - ACTIVE"]
         end
         
         B[Button: Abmelden]
